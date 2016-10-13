@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import MessageUI
-
-class GKLoginViewController: UIViewController, MFMessageComposeViewControllerDelegate {
+    
+class GKLoginViewController: UIViewController {
 
     @IBOutlet weak var inputNumberField: UITextField!
     
@@ -36,7 +35,6 @@ class GKLoginViewController: UIViewController, MFMessageComposeViewControllerDel
      }
      */
     
-
     
     
     @IBAction func sendInAppSMS(sender: AnyObject) {
@@ -63,8 +61,7 @@ class GKLoginViewController: UIViewController, MFMessageComposeViewControllerDel
         else {
             self.showAlertWithMessage("Wrong Credentials")
         }
-        
-        
+ 
     }
     
     
@@ -89,26 +86,6 @@ class GKLoginViewController: UIViewController, MFMessageComposeViewControllerDel
 
 [self dismissModalViewControllerAnimated:YES];
 }*/
-
-
-
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
-        switch result {
-        case MessageComposeResultCancelled:
-            NSLog("Cancelled")
-        break
-        case MessageComposeResultFailed:
-            let alert = UIAlertController.init(title: "My App", message: "unknown error", preferredStyle: .Alert)
-            self.presentViewController(alert, animated: true, completion: nil)
-            break
-            
-        case MessageComposeResultSent:
-            print("Sent")
-            break
-        default:
-            break
-        }
-    }
     
     
     
@@ -120,5 +97,4 @@ class GKLoginViewController: UIViewController, MFMessageComposeViewControllerDel
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
-    
 }
