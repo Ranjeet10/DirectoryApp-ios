@@ -16,9 +16,17 @@ class GKLeftMenuViewController: UIViewController {
     
     var aboutAppViewController: GKAboutAppViewController?
     
+    var loggedIn = false
+    
+    var profileDetails: NSDictionary?
+        
     @IBOutlet weak var menuTopView: UIView!
     
     @IBOutlet weak var menuTable: UITableView!
+    
+    @IBOutlet weak var username: UILabel!
+    
+    @IBOutlet weak var userShortDetails: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +52,20 @@ class GKLeftMenuViewController: UIViewController {
     }
     
     
-    func showPostLoginMenu() {
+    func showPostLoginMenu(notification: NSNotification) {
+        
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        let details = userInfo["userDetails"] as! NSDictionary?
+        self.profileDetails = details
         
         self.menuItems = ["My Profile","Edit Profile", "Sync", "Share", "Rate", "Logout"]
         self.menuItemsDescription = ["View your details", "Edit your Profile", "Sync Database", "Share with your friends", "Rate app on App Store", "Logout from your account"]
-        self.menuTable.reloadData()
+       self.loggedIn = true
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.username.text = self.profileDetails?.objectForKey("name") as? String
+            self.userShortDetails.text = self.profileDetails?.objectForKey("position") as? String
+             self.menuTable.reloadData()
+        }
         
     }
     
@@ -84,21 +101,42 @@ class GKLeftMenuViewController: UIViewController {
         
         if indexPath.row == 1 {
             
+           if self.loggedIn {
+            
+           }
+            
+           else {
+            
+            
             let aboutAppViewController = storyboard.instantiateViewControllerWithIdentifier("GKAboutAppViewController") as! GKAboutAppViewController
             
             let navVC = UINavigationController(rootViewController: aboutAppViewController)
             self.slideMenuController()?.changeMainViewController(navVC, close: true)
+            
+            }
             
             
         }
         
         if indexPath.row == 0 {
             
-            let loginViewController = storyboard.instantiateViewControllerWithIdentifier("GKLoginViewController") as! GKLoginViewController
-            
-            let navVC = UINavigationController(rootViewController: loginViewController)
-            self.slideMenuController()?.changeMainViewController(navVC, close: true)
-            
+            if self.loggedIn {
+                
+                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                
+                let viewMyProfile: GKUserDetailsViewController = storyboard.instantiateViewControllerWithIdentifier("GKUserDetailsViewController") as! GKUserDetailsViewController
+                
+                viewMyProfile.profileDetails = self.profileDetails
+                viewMyProfile.showMyProfile = true
+                
+                let navVC = UINavigationController(rootViewController: viewMyProfile)
+                self.slideMenuController()?.changeMainViewController(navVC, close: true)
+    
+                
+            }else {
+                self.checkDefaultsAndShowRespectivePage()
+            }
+           
             
         }
         
@@ -106,13 +144,43 @@ class GKLeftMenuViewController: UIViewController {
             
             self.menuItems = ["Login", "About App", "Sync", "Share", "Rate"]
             self.menuItemsDescription = ["Login if you are Govt Employee", "Know more about app", "Sync Database", "Share with your friends", "Rate app on App Store"]
-            self.menuTable.reloadData()
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.username.text = "Guest"
+                self.userShortDetails.text = "Login if you are a gov employee"
+                self.menuTable.reloadData()
+            }
+            self.loggedIn = false
             let mainViewController = storyboard.instantiateViewControllerWithIdentifier("GKMainViewController") as! GKMainViewController
             let navVC = UINavigationController(rootViewController: mainViewController)
             self.slideMenuController()?.changeMainViewController(navVC, close: true)
             
         }
         
+    }
+    
+    func checkDefaultsAndShowRespectivePage() {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if !defaults.boolForKey("hasLoggedInSecond") {
+            defaults.setBool(false, forKey: "hasLoggedInSecond")
+        }
+        
+        if defaults.boolForKey("hasLoggedInSecond") {
+            
+            let loginAppViewController = storyboard!.instantiateViewControllerWithIdentifier("GKLoginAppViewController") as! GKLoginAppViewController
+            
+            let navVC = UINavigationController(rootViewController: loginAppViewController)
+            self.slideMenuController()?.changeMainViewController(navVC, close: true)
+        }
+        else {
+            
+            let loginViewController = storyboard!.instantiateViewControllerWithIdentifier("GKLoginViewController") as! GKLoginViewController
+            
+            let navVC = UINavigationController(rootViewController: loginViewController)
+            self.slideMenuController()?.changeMainViewController(navVC, close: true)
+        }
+    
     }
     
 }

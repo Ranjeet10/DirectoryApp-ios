@@ -18,23 +18,39 @@ class GKUserDetailsViewController: UIViewController {
     @IBOutlet weak var userDetailsTableView: UITableView!
     
     
-    @IBOutlet weak var userDepartment: UILabel!
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var userPosition: UILabel!
+    @IBOutlet weak var userDepartmentLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userPositionLabel: UILabel!
+    
+    var userDepartment: String?
+    var userName: String?
+    var userPosition: String?
+    var showMyProfile: Bool?
+    var profileDetails: NSDictionary?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        self.individualInsideLevel1Detail = insideLevel1Details![selectedIndex!] as! NSDictionary
-        let userDepartment = individualInsideLevel1Detail.objectForKey("level1") as? String
-        let userName = individualInsideLevel1Detail.objectForKey("name") as? String
-        let userPosition = individualInsideLevel1Detail.objectForKey("position") as? String
+        if self.showMyProfile! {
+            self.individualInsideLevel1Detail = profileDetails
+            self.customizeDetailViewsNavigationBar()
+        }
         
-        self.userDepartment.text = userDepartment
-        self.userName.text = userName
-        self.userPosition.text = userPosition
+        else {
+            self.individualInsideLevel1Detail = insideLevel1Details![selectedIndex!] as! NSDictionary
+            
+        }
+        
+        self.userDepartment = individualInsideLevel1Detail.objectForKey("level1") as? String
+        self.userName = individualInsideLevel1Detail.objectForKey("name") as? String
+        self.userPosition = individualInsideLevel1Detail.objectForKey("position") as? String
+    
+        
+        self.userDepartmentLabel.text = userDepartment
+        self.userNameLabel.text = userName
+        self.userPositionLabel.text = userPosition
         
         self.userDetailsTableView.estimatedRowHeight = 100
         self.userDetailsTableView.rowHeight = UITableViewAutomaticDimension

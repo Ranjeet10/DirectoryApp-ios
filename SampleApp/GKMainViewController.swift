@@ -199,7 +199,10 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate{
                 return
             }
             self.level1Details = resultDict.objectForKey("level1") as! NSArray
-            self.level1TableView.reloadData()
+            
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.level1TableView.reloadData()
+            }
             
         } catch  {
             print("error trying to convert data to JSON")

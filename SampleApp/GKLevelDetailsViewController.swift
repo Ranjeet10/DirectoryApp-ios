@@ -84,6 +84,7 @@ class GKLevelDetailsViewController: UIViewController {
             
             userDetailsVC.insideLevel1Details = self.insideLevel1Details
             userDetailsVC.selectedIndex = self.insideLevel1DetailsTable.indexPathForSelectedRow?.row
+            userDetailsVC.showMyProfile = false
         }
     }
     
