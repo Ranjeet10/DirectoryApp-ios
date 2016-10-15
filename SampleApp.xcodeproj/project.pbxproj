@@ -77,51 +77,6 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		5D9EA5D01DB204A900CE96FC /* Commons */ = {
-			isa = PBXGroup;
-			children = (
-				5D9EA5CB1DB1E6B800CE96FC /* GKConstants.swift */,
-				5D30B29F1DA64F550049C0B0 /* GKCommonUtilities.swift */,
-			);
-			name = Commons;
-			sourceTree = "<group>";
-		};
-		5D9EA5D11DB204C500CE96FC /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				5D30B2A11DA6533B0049C0B0 /* GKLoginViewController.swift */,
-				5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */,
-				5D9EA5CD1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift */,
-				5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */,
-			);
-			name = Login;
-			sourceTree = "<group>";
-		};
-		5D9EA5D21DB204F800CE96FC /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				5D79A6A91DA5804900F1BBB6 /* Level1TableViewCell.swift */,
-				5DE6DD7D1DA4E8C900DC4E10 /* GKMainViewController.swift */,
-				5D7CCEF31DA5378000853E20 /* GKAboutAppViewController.swift */,
-				5D30B2A31DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift */,
-				5DB880DC1DAFB519001B2D42 /* UserDetailsTableViewCell.swift */,
-				5DA4C0211DA6D01C008FFEF2 /* GKUserDetailsViewController.swift */,
-				5D30B2AB1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift */,
-				5D79A6AB1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift */,
-			);
-			name = Data;
-			sourceTree = "<group>";
-		};
-		5D9EA5D31DB2054A00CE96FC /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				5D7CCEEF1DA5360800853E20 /* LeftMenuItemTableViewCell.swift */,
-				5DB880DA1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift */,
-				5DB880D81DAFB484001B2D42 /* GKSlideMenuViewController.swift */,
-			);
-			name = Menu;
-			sourceTree = "<group>";
-		};
 		5DE6DD5F1DA4E67900DC4E10 = {
 			isa = PBXGroup;
 			children = (
@@ -141,12 +96,25 @@
 		5DE6DD6A1DA4E67A00DC4E10 /* SampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				5DE6DD6B1DA4E67A00DC4E10 /* AppDelegate.swift */,
 				5D79A6A31DA56B9800F1BBB6 /* API */,
-				5D9EA5D31DB2054A00CE96FC /* Menu */,
-				5D9EA5D21DB204F800CE96FC /* Data */,
-				5D9EA5D01DB204A900CE96FC /* Commons */,
-				5D9EA5D11DB204C500CE96FC /* Login */,
+				5DE6DD6B1DA4E67A00DC4E10 /* AppDelegate.swift */,
+				5D30B2A11DA6533B0049C0B0 /* GKLoginViewController.swift */,
+				5D9EA5CD1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift */,
+				5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */,
+				5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */,
+				5D7CCEEF1DA5360800853E20 /* LeftMenuItemTableViewCell.swift */,
+				5DB880DA1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift */,
+				5DB880D81DAFB484001B2D42 /* GKSlideMenuViewController.swift */,
+				5D79A6A91DA5804900F1BBB6 /* Level1TableViewCell.swift */,
+				5DE6DD7D1DA4E8C900DC4E10 /* GKMainViewController.swift */,
+				5D7CCEF31DA5378000853E20 /* GKAboutAppViewController.swift */,
+				5D30B2A31DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift */,
+				5DB880DC1DAFB519001B2D42 /* UserDetailsTableViewCell.swift */,
+				5DA4C0211DA6D01C008FFEF2 /* GKUserDetailsViewController.swift */,
+				5D30B2AB1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift */,
+				5D79A6AB1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift */,
+				5D9EA5CB1DB1E6B800CE96FC /* GKConstants.swift */,
+				5D30B29F1DA64F550049C0B0 /* GKCommonUtilities.swift */,
 				5D30B2A81DA675000049C0B0 /* Main.storyboard */,
 				5DE6DD721DA4E67A00DC4E10 /* Assets.xcassets */,
 				5DE6DD741DA4E67A00DC4E10 /* LaunchScreen.storyboard */,
