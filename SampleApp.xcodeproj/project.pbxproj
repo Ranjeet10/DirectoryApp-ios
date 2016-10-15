@@ -32,7 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5D30B29F1DA64F550049C0B0 /* GKCommonUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKCommonUtilities.swift; sourceTree = "<group>"; };
+		5D30B29F1DA64F550049C0B0 /* GKCommonUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GKCommonUtilities.swift; path = ../GKCommonUtilities.swift; sourceTree = "<group>"; };
 		5D30B2A11DA6533B0049C0B0 /* GKLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKLoginViewController.swift; sourceTree = "<group>"; };
 		5D30B2A31DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKInsideLevel1DetailsViewController.swift; sourceTree = "<group>"; };
 		5D30B2A91DA675000049C0B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -44,7 +44,7 @@
 		5D79A6AB1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKLevelDetailsViewController.swift; sourceTree = "<group>"; };
 		5D7CCEEF1DA5360800853E20 /* LeftMenuItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuItemTableViewCell.swift; sourceTree = "<group>"; };
 		5D7CCEF31DA5378000853E20 /* GKAboutAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKAboutAppViewController.swift; sourceTree = "<group>"; };
-		5D9EA5CB1DB1E6B800CE96FC /* GKConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKConstants.swift; sourceTree = "<group>"; };
+		5D9EA5CB1DB1E6B800CE96FC /* GKConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GKConstants.swift; path = ../GKConstants.swift; sourceTree = "<group>"; };
 		5D9EA5CD1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKVerifyCodeViewController.swift; sourceTree = "<group>"; };
 		5DA4C0211DA6D01C008FFEF2 /* GKUserDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKUserDetailsViewController.swift; sourceTree = "<group>"; };
 		5DB880D81DAFB484001B2D42 /* GKSlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKSlideMenuViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +77,15 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		5D9EA5E01DB20E0C00CE96FC /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				5D9EA5CB1DB1E6B800CE96FC /* GKConstants.swift */,
+				5D30B29F1DA64F550049C0B0 /* GKCommonUtilities.swift */,
+			);
+			path = Commons;
+			sourceTree = "<group>";
+		};
 		5DE6DD5F1DA4E67900DC4E10 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +110,7 @@
 				5D30B2A11DA6533B0049C0B0 /* GKLoginViewController.swift */,
 				5D9EA5CD1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift */,
 				5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */,
+				5D9EA5E01DB20E0C00CE96FC /* Commons */,
 				5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */,
 				5D7CCEEF1DA5360800853E20 /* LeftMenuItemTableViewCell.swift */,
 				5DB880DA1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift */,
@@ -113,8 +123,6 @@
 				5DA4C0211DA6D01C008FFEF2 /* GKUserDetailsViewController.swift */,
 				5D30B2AB1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift */,
 				5D79A6AB1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift */,
-				5D9EA5CB1DB1E6B800CE96FC /* GKConstants.swift */,
-				5D30B29F1DA64F550049C0B0 /* GKCommonUtilities.swift */,
 				5D30B2A81DA675000049C0B0 /* Main.storyboard */,
 				5DE6DD721DA4E67A00DC4E10 /* Assets.xcassets */,
 				5DE6DD741DA4E67A00DC4E10 /* LaunchScreen.storyboard */,
