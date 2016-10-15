@@ -8,7 +8,7 @@
 
 import UIKit
     
-class GKLoginViewController: UIViewController {
+class GKLoginViewController: UIViewController, HTTPClientDelegate{
 
     @IBOutlet weak var inputNumberField: UITextField!
     var tableID: String?
@@ -41,7 +41,7 @@ class GKLoginViewController: UIViewController {
     
     
     @IBAction func sendInAppSMS(sender: AnyObject) {
-        self.checkUser("")
+        self.checkUserHelper()
     
      /*   if MFMessageComposeViewController.canSendText() {
             
@@ -124,7 +124,7 @@ class GKLoginViewController: UIViewController {
     }
  */
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  /*  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showUpdatePassword" {
             
@@ -132,10 +132,58 @@ class GKLoginViewController: UIViewController {
             updatePasswordController.phoneNumber = inputNumberField.text
             
         }
+        
+        if segue.identifier == "verifyCodeSegue" {
+            
+            let verifyCodeController:GKVerifyCodeViewController = segue.destinationViewController as! GKVerifyCodeViewController
+            
+        }
+    }
+ */
+    
+    func checkUserHelper() {
+        
+        let url = GKConstants.sharedInstanse.checkUserAPI
+        let body = "mobile=".stringByAppendingString(self.inputNumberField.text!)
+        let checkUserAPIHelper = HTTPClient()
+        checkUserAPIHelper.delegate = self
+        checkUserAPIHelper.postRequest(url, body: body)
+    }
+    
+    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool) {
+        
+        
+        let responseFromServerDict = resultDict as! NSDictionary
+        
+        print("The result is: " + responseFromServerDict.description)
+        if responseFromServerDict["error"] as! Bool == false {
+            
+            let resultArray = resultDict.objectForKey("table") as! NSArray
+            
+            self.tableID = resultArray[0].objectForKey("tableID") as? String
+            self.level1 = resultArray[0].objectForKey("level1") as? String
+            
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+               // self.performSegueWithIdentifier("showUpdatePassword", sender: self)
+                self.performSegueWithIdentifier("verifyCodeSegue", sender: self)
+            }
+            
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.showAlertWithMessage("User does not exist")
+            }
+        }
+        
+    }
+    
+    func didFailWithPOSTRequestError(resultStatus: Bool) {
+        print("Error")
+        self.showAlertWithMessage("Somethig went wrong")
     }
     
     
-    func checkUser(phoneNumber: String) {
+  /*  func checkUser(phoneNumber: String) {
         
         let myURL = NSURL(string: "http://directory.karnataka.gov.in/mobilecheck.php")!
         let request = NSMutableURLRequest(URL: myURL)
@@ -191,5 +239,6 @@ class GKLoginViewController: UIViewController {
         task.resume()
         
     }
+ */
     
 }

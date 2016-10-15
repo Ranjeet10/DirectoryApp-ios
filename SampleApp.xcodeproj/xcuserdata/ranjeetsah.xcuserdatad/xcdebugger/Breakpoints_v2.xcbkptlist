@@ -42,13 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SampleApp/GKUpdatePasswordViewController.swift"
-            timestampString = "498164087.345745"
+            timestampString = "498200385.782437"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "updatePassword()"
-            landmarkType = "5">
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "GKUpdatePasswordViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,12 +58,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SampleApp/GKUpdatePasswordViewController.swift"
-            timestampString = "498164087.345745"
+            timestampString = "498200385.782437"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "showLoggedInHomePage()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SampleApp/GKVerifyCodeViewController.swift"
+            timestampString = "498203902.618817"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "verifyCode()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GKUpdatePasswordViewController: UIViewController {
+class GKUpdatePasswordViewController: UIViewController,HTTPClientDelegate {
 
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var enterPasswordText: UITextField!
@@ -47,7 +47,8 @@ class GKUpdatePasswordViewController: UIViewController {
      
         if self.enterPasswordText.text == self.confirmPasswordText.text {
             self.newPassword = self.enterPasswordText.text
-            self.updatePassword()
+          //  self.updatePassword()
+            self.updatePasswordHelper()
         }else {
             self.newPassword = ""
             self.showAlertWithMessage("Passwords dont match")
@@ -56,7 +57,40 @@ class GKUpdatePasswordViewController: UIViewController {
     }
     
     
-    func updatePassword() {
+    func updatePasswordHelper() {
+        
+        let url = GKConstants.sharedInstanse.updatePasswordAPI
+        let body = "mobile=8105991000&tableID=department2&password=hello1984"
+        let updatePasswordAPIHelper = HTTPClient()
+        updatePasswordAPIHelper.delegate = self
+        updatePasswordAPIHelper.postRequest(url, body: body)
+    }
+    
+    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool) {
+        
+        
+        let responseFromServerDict = resultDict as! NSDictionary
+        
+        print("The result is: " + responseFromServerDict.description)
+        if responseFromServerDict["error"] as! Bool == false {
+            
+            self.receivedData = resultDict.objectForKey("user") as? NSDictionary
+            
+            print(self.receivedData!.objectForKey("name"))
+            print(self.receivedData!.objectForKey("email"))
+            self.showLoggedInHomePage()
+            
+        }
+        
+    }
+    
+    func didFailWithPOSTRequestError(resultStatus: Bool) {
+        print("Error")
+        self.showAlertWithMessage("Somethig went wrong")
+    }
+    
+    
+ /*   func updatePassword() {
         
             let myURL = NSURL(string: "http://directory.karnataka.gov.in/updatepswrd.php")!
             let request = NSMutableURLRequest(URL: myURL)
@@ -103,6 +137,7 @@ class GKUpdatePasswordViewController: UIViewController {
             task.resume()        
                     
     }
+  */
     
     func showLoggedInHomePage() {
         
@@ -118,5 +153,6 @@ class GKUpdatePasswordViewController: UIViewController {
         
         
     }
+
 
 }

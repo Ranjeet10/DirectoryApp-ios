@@ -442,6 +442,80 @@
             </objects>
             <point key="canvasLocation" x="1801" y="286"/>
         </scene>
+        <!--Verify Code View Controller-->
+        <scene sceneID="ok3-1L-X94">
+            <objects>
+                <viewController storyboardIdentifier="GKVerifyCodeViewController" id="ltd-Zy-T3K" customClass="GKVerifyCodeViewController" customModule="SampleApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nAb-yW-ZRt"/>
+                        <viewControllerLayoutGuide type="bottom" id="HRx-He-r7X"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dBd-vC-r1v">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Edit code number" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4DL-AP-GOO">
+                                <rect key="frame" x="20" y="20" width="560" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="uZU-gL-f5r"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVd-bW-GO7">
+                                <rect key="frame" x="20" y="58" width="560" height="30"/>
+                                <color key="backgroundColor" red="0.84372996789999999" green="0.1091539898" blue="0.1432629242" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="PbU-ZS-LHc"/>
+                                </constraints>
+                                <state key="normal" title="Verify">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="verifyButtonAction:" destination="ltd-Zy-T3K" eventType="touchUpInside" id="enZ-Re-jkv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yD-bl-MwO">
+                                <rect key="frame" x="20" y="96" width="560" height="30"/>
+                                <color key="backgroundColor" red="0.84372996789999999" green="0.1091539898" blue="0.1432629242" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="XHi-PM-hb7"/>
+                                </constraints>
+                                <state key="normal" title="Edit Mobile Number/Get Code">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="editNumberButtonAction:" destination="ltd-Zy-T3K" eventType="touchUpInside" id="TOY-k0-Fkd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XVd-bW-GO7" secondAttribute="trailing" constant="20" id="0GH-QC-NU9"/>
+                            <constraint firstAttribute="trailing" secondItem="0yD-bl-MwO" secondAttribute="trailing" constant="20" id="1Vd-JF-a8a"/>
+                            <constraint firstItem="XVd-bW-GO7" firstAttribute="leading" secondItem="dBd-vC-r1v" secondAttribute="leading" constant="20" id="5lz-Qe-L4j"/>
+                            <constraint firstItem="0yD-bl-MwO" firstAttribute="top" secondItem="XVd-bW-GO7" secondAttribute="bottom" constant="8" id="9HK-ml-W9E"/>
+                            <constraint firstAttribute="trailing" secondItem="4DL-AP-GOO" secondAttribute="trailing" constant="20" id="C4x-u4-J4r"/>
+                            <constraint firstItem="XVd-bW-GO7" firstAttribute="top" secondItem="4DL-AP-GOO" secondAttribute="bottom" constant="8" id="OVa-hZ-8CA"/>
+                            <constraint firstItem="0yD-bl-MwO" firstAttribute="top" secondItem="XVd-bW-GO7" secondAttribute="bottom" constant="8" id="RmZ-20-7ZQ"/>
+                            <constraint firstItem="XVd-bW-GO7" firstAttribute="top" secondItem="4DL-AP-GOO" secondAttribute="bottom" constant="8" id="hLm-eB-6IM"/>
+                            <constraint firstItem="4DL-AP-GOO" firstAttribute="leading" secondItem="dBd-vC-r1v" secondAttribute="leading" constant="20" id="j6L-kB-yzJ"/>
+                            <constraint firstItem="4DL-AP-GOO" firstAttribute="top" secondItem="nAb-yW-ZRt" secondAttribute="bottom" id="wcR-Ff-SJw"/>
+                            <constraint firstItem="0yD-bl-MwO" firstAttribute="leading" secondItem="dBd-vC-r1v" secondAttribute="leading" constant="20" id="yr9-Td-zuf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="codeTextField" destination="4DL-AP-GOO" id="bS4-vF-WYk"/>
+                        <outlet property="editMobileNumberButton" destination="0yD-bl-MwO" id="5vd-He-tX2"/>
+                        <outlet property="verifyButton" destination="XVd-bW-GO7" id="tRV-7k-xb9"/>
+                        <segue destination="6Ep-Po-qN7" kind="show" identifier="showUpdatePasswordSegue" id="XiE-HQ-Lt4"/>
+                        <segue destination="WTs-de-VxC" kind="show" identifier="showGetCodeViewSegue" id="nSD-QK-ZFU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AIG-1y-GJo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3076" y="-586"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="wi7-O8-wsH">
             <objects>
@@ -487,13 +561,12 @@
                     </view>
                     <connections>
                         <outlet property="inputNumberField" destination="Waw-dw-Rv3" id="jZe-29-ECE"/>
-                        <segue destination="Soo-6W-NzM" kind="show" identifier="showLoginScreen" id="RVd-d9-2PT"/>
-                        <segue destination="6Ep-Po-qN7" kind="show" identifier="showUpdatePassword" id="AM8-gK-A6j"/>
+                        <segue destination="ltd-Zy-T3K" kind="show" identifier="verifyCodeSegue" id="fQk-A8-ASP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeD-e3-Kmn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2490" y="199"/>
+            <point key="canvasLocation" x="2469" y="275"/>
         </scene>
         <!--Login App View Controller-->
         <scene sceneID="Go6-zw-c7E">
@@ -580,7 +653,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mDS-kJ-hS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3188" y="199"/>
+            <point key="canvasLocation" x="3755" y="314"/>
         </scene>
         <!--Update Password View Controller-->
         <scene sceneID="6g0-26-4MY">
@@ -661,7 +734,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KB9-wG-ize" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3964" y="199"/>
+            <point key="canvasLocation" x="3789" y="-934"/>
         </scene>
         <!--Left Menu View Controller-->
         <scene sceneID="giV-MD-OSw">
@@ -821,4 +894,7 @@
         <image name="aboutAppKarnataka" width="256" height="100"/>
         <image name="profile" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="nSD-QK-ZFU"/>
+    </inferredMetricsTieBreakers>
 </document>

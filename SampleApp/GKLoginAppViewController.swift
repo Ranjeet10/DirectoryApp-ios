@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GKLoginAppViewController: UIViewController {
+class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
     
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var enterPasswordText: UITextField!
@@ -27,7 +27,8 @@ class GKLoginAppViewController: UIViewController {
         
         self.phoneNumberLabel.text = phoneNumber
         
-        self.checkUser("")
+       // self.checkUser("")
+        self.checkUserHelper()
         
       //  self.loginUser("")
         self.customizeDetailViewsNavigationBar()
@@ -70,7 +71,48 @@ class GKLoginAppViewController: UIViewController {
  */
     
     
-    func checkUser(phoneNumber: String) {
+    func checkUserHelper() {
+        
+        let url = GKConstants.sharedInstanse.checkUserAPI
+        let body = "mobile=".stringByAppendingString("8105991000")
+        let checkUserAPIHelper = HTTPClient()
+        checkUserAPIHelper.delegate = self
+        checkUserAPIHelper.postRequest(url, body: body)
+    }
+    
+    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool) {
+        
+        
+        let responseFromServerDict = resultDict as! NSDictionary
+        
+        print("The result is: " + resultDict.description)
+        if responseFromServerDict["error"] as! Bool == false {
+            
+            let resultArray = responseFromServerDict.objectForKey("table") as! NSArray
+            
+            self.tableID = resultArray[0].objectForKey("tableID") as! String
+            self.level1 = resultArray[0].objectForKey("level1") as! String
+            
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.showAlertWithMessage("User does not exist")
+            }
+        }
+        
+    }
+    
+    func didFailWithPOSTRequestError(resultStatus: Bool) {
+        print("Error")
+        self.showAlertWithMessage("Somethig went wrong")
+    }
+
+    
+    
+    
+    
+    
+ /*   func checkUser(phoneNumber: String) {
     
         
         let myURL = NSURL(string: "http://directory.karnataka.gov.in/mobilecheck.php")!
@@ -122,6 +164,7 @@ class GKLoginAppViewController: UIViewController {
         
         
     }
+ */
  
     
     
