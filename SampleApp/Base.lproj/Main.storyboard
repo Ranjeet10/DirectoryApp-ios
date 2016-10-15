@@ -174,7 +174,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wT3-3g-nSH">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wT3-3g-nSH">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -182,7 +182,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rMv-pY-0QE" id="17W-I7-EcJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="81.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="82"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTE-JJ-YWj">
@@ -409,8 +409,26 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLe-xZ-Eed">
-                                <rect key="frame" x="20" y="257" width="555" height="300"/>
-                                <string key="text">LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel</string>
+                                <rect key="frame" x="20" y="257" width="555" height="72"/>
+                                <string key="text">This application provides contact details of Karnataka Government officers by department wise and position wise. If you are Karnataka Government officer, you can view/edit your profile and you can view mobile nummbers of all other officers.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="1. Click on 'Login' and enter your mobile number." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfK-WB-t19">
+                                <rect key="frame" x="20" y="337" width="555" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="2. Enter the verification code that you have received via SMS." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1I-0D-lV8">
+                                <rect key="frame" x="20" y="363" width="555" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="3. After succesful login, you can view Mobile numbers of all officers." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WB2-Ai-O7n">
+                                <rect key="frame" x="20" y="389" width="555" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -419,16 +437,27 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZLe-xZ-Eed" firstAttribute="top" secondItem="pX1-sP-SB5" secondAttribute="bottom" constant="48" id="1rD-X1-1mS"/>
+                            <constraint firstItem="bfK-WB-t19" firstAttribute="leading" secondItem="UYm-DR-RB0" secondAttribute="leadingMargin" id="7u0-XI-KPL"/>
                             <constraint firstItem="ZLe-xZ-Eed" firstAttribute="leading" secondItem="UYm-DR-RB0" secondAttribute="leading" constant="20" id="Dih-Lp-YH5"/>
+                            <constraint firstItem="WB2-Ai-O7n" firstAttribute="top" secondItem="Y1I-0D-lV8" secondAttribute="bottom" constant="8" id="F6j-4I-p5G"/>
+                            <constraint firstItem="Y1I-0D-lV8" firstAttribute="leading" secondItem="UYm-DR-RB0" secondAttribute="leadingMargin" id="FAf-GM-6Vu"/>
+                            <constraint firstItem="WB2-Ai-O7n" firstAttribute="top" secondItem="Y1I-0D-lV8" secondAttribute="bottom" constant="8" id="Hs7-Xu-C70"/>
+                            <constraint firstItem="Y1I-0D-lV8" firstAttribute="top" secondItem="bfK-WB-t19" secondAttribute="bottom" constant="8" id="JDj-GP-1k8"/>
                             <constraint firstItem="Qpf-Hi-Rlg" firstAttribute="leading" secondItem="UYm-DR-RB0" secondAttribute="leading" constant="20" id="NEQ-hL-Ant"/>
                             <constraint firstAttribute="trailing" secondItem="ZLe-xZ-Eed" secondAttribute="trailing" constant="25" id="R9b-2o-7lz"/>
-                            <constraint firstItem="ZJh-pq-WRi" firstAttribute="top" secondItem="ZLe-xZ-Eed" secondAttribute="bottom" constant="43" id="XjU-mV-xv5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WB2-Ai-O7n" secondAttribute="trailing" constant="5" id="Usv-qx-bU3"/>
                             <constraint firstItem="pX1-sP-SB5" firstAttribute="top" secondItem="Qpf-Hi-Rlg" secondAttribute="bottom" constant="19" id="Z6t-OQ-hnm"/>
                             <constraint firstItem="ZLe-xZ-Eed" firstAttribute="top" secondItem="pX1-sP-SB5" secondAttribute="bottom" constant="46" id="ZOM-rc-x2B"/>
+                            <constraint firstItem="bfK-WB-t19" firstAttribute="top" secondItem="ZLe-xZ-Eed" secondAttribute="bottom" constant="8" id="dHS-KD-s7O"/>
+                            <constraint firstItem="WB2-Ai-O7n" firstAttribute="leading" secondItem="UYm-DR-RB0" secondAttribute="leadingMargin" id="eje-Mb-cFh"/>
                             <constraint firstItem="pX1-sP-SB5" firstAttribute="trailing" secondItem="UYm-DR-RB0" secondAttribute="trailingMargin" constant="-5" id="ewh-5H-N7q"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Y1I-0D-lV8" secondAttribute="trailing" constant="5" id="fJZ-WW-dyC"/>
                             <constraint firstItem="pX1-sP-SB5" firstAttribute="leading" secondItem="UYm-DR-RB0" secondAttribute="leadingMargin" id="gMb-4v-A91"/>
+                            <constraint firstItem="Y1I-0D-lV8" firstAttribute="top" secondItem="bfK-WB-t19" secondAttribute="bottom" constant="8" id="mZG-ZS-cBe"/>
                             <constraint firstItem="Qpf-Hi-Rlg" firstAttribute="top" secondItem="ZQ1-Ax-zwG" secondAttribute="bottom" constant="21" id="qeN-5c-2qg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bfK-WB-t19" secondAttribute="trailing" constant="5" id="uVA-Fu-cuV"/>
                             <constraint firstItem="pX1-sP-SB5" firstAttribute="top" secondItem="Qpf-Hi-Rlg" secondAttribute="bottom" constant="19" id="v1R-D5-3ID"/>
+                            <constraint firstItem="bfK-WB-t19" firstAttribute="top" secondItem="ZLe-xZ-Eed" secondAttribute="bottom" constant="8" id="yQn-Iz-QIT"/>
                             <constraint firstAttribute="trailing" secondItem="Qpf-Hi-Rlg" secondAttribute="trailing" constant="20" id="zsH-XT-gxX"/>
                         </constraints>
                         <variation key="default">

@@ -12,17 +12,13 @@
 		5D30B2A41DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30B2A31DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift */; };
 		5D30B2AA1DA675000049C0B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D30B2A81DA675000049C0B0 /* Main.storyboard */; };
 		5D30B2AC1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30B2AB1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift */; };
-		5D4105C91DAB96B6003E82C2 /* LibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4105C61DAB96B6003E82C2 /* LibraryAPI.swift */; };
-		5D4105CA1DAB96B6003E82C2 /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4105C71DAB96B6003E82C2 /* PersistencyManager.swift */; };
 		5D4105CB1DAB96B6003E82C2 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4105C81DAB96B6003E82C2 /* HTTPClient.swift */; };
 		5D4703471DB1015A00C41DB2 /* GKLoginAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */; };
 		5D4703491DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */; };
-		5D79A6A71DA56D0500F1BBB6 /* GKAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A6A61DA56D0500F1BBB6 /* GKAPIManager.swift */; };
 		5D79A6AA1DA5804900F1BBB6 /* Level1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A6A91DA5804900F1BBB6 /* Level1TableViewCell.swift */; };
 		5D79A6AC1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A6AB1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift */; };
 		5D7CCEF11DA5360800853E20 /* LeftMenuItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7CCEEF1DA5360800853E20 /* LeftMenuItemTableViewCell.swift */; };
 		5D7CCEF41DA5378000853E20 /* GKAboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7CCEF31DA5378000853E20 /* GKAboutAppViewController.swift */; };
-		5D91B6981DA8D7F100FDE5F6 /* Level1DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D91B6971DA8D7F100FDE5F6 /* Level1DetailsModel.swift */; };
 		5D9EA5CC1DB1E6B800CE96FC /* GKConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9EA5CB1DB1E6B800CE96FC /* GKConstants.swift */; };
 		5D9EA5CE1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9EA5CD1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift */; };
 		5DA4C0221DA6D01C008FFEF2 /* GKUserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4C0211DA6D01C008FFEF2 /* GKUserDetailsViewController.swift */; };
@@ -41,17 +37,13 @@
 		5D30B2A31DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKInsideLevel1DetailsViewController.swift; sourceTree = "<group>"; };
 		5D30B2A91DA675000049C0B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5D30B2AB1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsideLevel1TableViewCell.swift; sourceTree = "<group>"; };
-		5D4105C61DAB96B6003E82C2 /* LibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPI.swift; sourceTree = "<group>"; };
-		5D4105C71DAB96B6003E82C2 /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		5D4105C81DAB96B6003E82C2 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKLoginAppViewController.swift; sourceTree = "<group>"; };
 		5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKUpdatePasswordViewController.swift; sourceTree = "<group>"; };
-		5D79A6A61DA56D0500F1BBB6 /* GKAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKAPIManager.swift; sourceTree = "<group>"; };
 		5D79A6A91DA5804900F1BBB6 /* Level1TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level1TableViewCell.swift; sourceTree = "<group>"; };
 		5D79A6AB1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKLevelDetailsViewController.swift; sourceTree = "<group>"; };
 		5D7CCEEF1DA5360800853E20 /* LeftMenuItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuItemTableViewCell.swift; sourceTree = "<group>"; };
 		5D7CCEF31DA5378000853E20 /* GKAboutAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKAboutAppViewController.swift; sourceTree = "<group>"; };
-		5D91B6971DA8D7F100FDE5F6 /* Level1DetailsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level1DetailsModel.swift; sourceTree = "<group>"; };
 		5D9EA5CB1DB1E6B800CE96FC /* GKConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKConstants.swift; sourceTree = "<group>"; };
 		5D9EA5CD1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKVerifyCodeViewController.swift; sourceTree = "<group>"; };
 		5DA4C0211DA6D01C008FFEF2 /* GKUserDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKUserDetailsViewController.swift; sourceTree = "<group>"; };
@@ -80,20 +72,54 @@
 		5D79A6A31DA56B9800F1BBB6 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				5D79A6A61DA56D0500F1BBB6 /* GKAPIManager.swift */,
-				5D4105C61DAB96B6003E82C2 /* LibraryAPI.swift */,
-				5D4105C71DAB96B6003E82C2 /* PersistencyManager.swift */,
 				5D4105C81DAB96B6003E82C2 /* HTTPClient.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
 		};
-		5D91B6941DA8D7C100FDE5F6 /* Model */ = {
+		5D9EA5D01DB204A900CE96FC /* Commons */ = {
 			isa = PBXGroup;
 			children = (
-				5D91B6971DA8D7F100FDE5F6 /* Level1DetailsModel.swift */,
+				5D9EA5CB1DB1E6B800CE96FC /* GKConstants.swift */,
+				5D30B29F1DA64F550049C0B0 /* GKCommonUtilities.swift */,
 			);
-			path = Model;
+			name = Commons;
+			sourceTree = "<group>";
+		};
+		5D9EA5D11DB204C500CE96FC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				5D30B2A11DA6533B0049C0B0 /* GKLoginViewController.swift */,
+				5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */,
+				5D9EA5CD1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift */,
+				5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		5D9EA5D21DB204F800CE96FC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5D79A6A91DA5804900F1BBB6 /* Level1TableViewCell.swift */,
+				5DE6DD7D1DA4E8C900DC4E10 /* GKMainViewController.swift */,
+				5D7CCEF31DA5378000853E20 /* GKAboutAppViewController.swift */,
+				5D30B2A31DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift */,
+				5DB880DC1DAFB519001B2D42 /* UserDetailsTableViewCell.swift */,
+				5DA4C0211DA6D01C008FFEF2 /* GKUserDetailsViewController.swift */,
+				5D30B2AB1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift */,
+				5D79A6AB1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		5D9EA5D31DB2054A00CE96FC /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				5D7CCEEF1DA5360800853E20 /* LeftMenuItemTableViewCell.swift */,
+				5DB880DA1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift */,
+				5DB880D81DAFB484001B2D42 /* GKSlideMenuViewController.swift */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		5DE6DD5F1DA4E67900DC4E10 = {
@@ -115,27 +141,13 @@
 		5DE6DD6A1DA4E67A00DC4E10 /* SampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				5D91B6941DA8D7C100FDE5F6 /* Model */,
 				5DE6DD6B1DA4E67A00DC4E10 /* AppDelegate.swift */,
 				5D79A6A31DA56B9800F1BBB6 /* API */,
-				5DE6DD7D1DA4E8C900DC4E10 /* GKMainViewController.swift */,
-				5DB880DA1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift */,
-				5D7CCEEF1DA5360800853E20 /* LeftMenuItemTableViewCell.swift */,
-				5D30B29F1DA64F550049C0B0 /* GKCommonUtilities.swift */,
-				5D79A6A91DA5804900F1BBB6 /* Level1TableViewCell.swift */,
-				5DB880D81DAFB484001B2D42 /* GKSlideMenuViewController.swift */,
-				5D7CCEF31DA5378000853E20 /* GKAboutAppViewController.swift */,
-				5D30B2A31DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift */,
-				5D9EA5CB1DB1E6B800CE96FC /* GKConstants.swift */,
-				5D9EA5CD1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift */,
-				5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */,
-				5D30B2A11DA6533B0049C0B0 /* GKLoginViewController.swift */,
-				5DB880DC1DAFB519001B2D42 /* UserDetailsTableViewCell.swift */,
-				5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */,
+				5D9EA5D31DB2054A00CE96FC /* Menu */,
+				5D9EA5D21DB204F800CE96FC /* Data */,
+				5D9EA5D01DB204A900CE96FC /* Commons */,
+				5D9EA5D11DB204C500CE96FC /* Login */,
 				5D30B2A81DA675000049C0B0 /* Main.storyboard */,
-				5DA4C0211DA6D01C008FFEF2 /* GKUserDetailsViewController.swift */,
-				5D30B2AB1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift */,
-				5D79A6AB1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift */,
 				5DE6DD721DA4E67A00DC4E10 /* Assets.xcassets */,
 				5DE6DD741DA4E67A00DC4E10 /* LaunchScreen.storyboard */,
 				5DE6DD771DA4E67A00DC4E10 /* Info.plist */,
@@ -217,10 +229,7 @@
 				5D30B2AC1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift in Sources */,
 				5D79A6AA1DA5804900F1BBB6 /* Level1TableViewCell.swift in Sources */,
 				5D79A6AC1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift in Sources */,
-				5D4105C91DAB96B6003E82C2 /* LibraryAPI.swift in Sources */,
-				5D91B6981DA8D7F100FDE5F6 /* Level1DetailsModel.swift in Sources */,
 				5DB880DD1DAFB519001B2D42 /* UserDetailsTableViewCell.swift in Sources */,
-				5D79A6A71DA56D0500F1BBB6 /* GKAPIManager.swift in Sources */,
 				5D30B2A21DA6533B0049C0B0 /* GKLoginViewController.swift in Sources */,
 				5D9EA5CE1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift in Sources */,
 				5D30B2A41DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift in Sources */,
@@ -233,7 +242,6 @@
 				5DA4C0221DA6D01C008FFEF2 /* GKUserDetailsViewController.swift in Sources */,
 				5DE6DD7E1DA4E8C900DC4E10 /* GKMainViewController.swift in Sources */,
 				5D7CCEF11DA5360800853E20 /* LeftMenuItemTableViewCell.swift in Sources */,
-				5D4105CA1DAB96B6003E82C2 /* PersistencyManager.swift in Sources */,
 				5D4105CB1DAB96B6003E82C2 /* HTTPClient.swift in Sources */,
 				5D4703491DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift in Sources */,
 				5DE6DD6C1DA4E67A00DC4E10 /* AppDelegate.swift in Sources */,

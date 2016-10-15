@@ -60,17 +60,6 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
     }
     
     
-  /*  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "showUpdatePassword" {
-            
-            let loginController:GKLoginViewController = segue.destinationViewController as! GKLoginViewController
-            
-        }
-    }
- */
-    
-    
     func checkUserHelper() {
         
         let url = GKConstants.sharedInstanse.checkUserAPI
@@ -107,67 +96,7 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
         self.showAlertWithMessage("Somethig went wrong")
     }
 
-    
-    
-    
-    
-    
- /*   func checkUser(phoneNumber: String) {
-    
-        
-        let myURL = NSURL(string: "http://directory.karnataka.gov.in/mobilecheck.php")!
-        let request = NSMutableURLRequest(URL: myURL)
-        request.HTTPMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        let bodyStr:String = "mobile=".stringByAppendingString("8105991000")
-        request.HTTPBody = bodyStr.dataUsingEncoding(NSUTF8StringEncoding)
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            
-            // Your completion handler code here
-            
-            
-            guard let responseData = data else {
-                print("Error: did not receive data")
-                return
-            }
-            guard error == nil else {
-                print("error calling GET request")
-                print(error)
-                return
-            }
-            
-            do {
-                guard let resultDict = try NSJSONSerialization.JSONObjectWithData(responseData, options: []) as? NSDictionary else {
-                    
-                    print("Couldn't convert received data to JSON dictionary")
-                    return
-                }
-                print("The result is: " + resultDict.description)
-                if resultDict["error"] as! Bool == false {
-                    
-                    let resultArray = resultDict.objectForKey("table") as! NSArray
-                    
-                    self.tableID = resultArray[0].objectForKey("tableID") as! String
-                    self.level1 = resultArray[0].objectForKey("level1") as! String
-                    
-                }
-                
-            } catch  {
-                print("error trying to convert data to JSON")
-            }
-            
-        }
-        task.resume()
 
-        
-        
-    }
- */
- 
-    
-    
     func loginUser(phoneNumber: String) {
         
         let myURL = NSURL(string: "http://directory.karnataka.gov.in/checkpassword.php")!

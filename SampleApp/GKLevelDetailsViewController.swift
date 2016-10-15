@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GKLevelDetailsViewController: UIViewController {
+class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
     
     var insideLevel1Details: NSArray = NSArray()
     var level1Titile: String?
@@ -32,7 +32,7 @@ class GKLevelDetailsViewController: UIViewController {
       //  NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(populateTable(_:)), name: "GKInsideDetails", object: nil)
 
         
-        self.getInsideLevel1Data(self.departmentName!)
+        self.getInsideLevel1DataHelper(self.departmentName!)
 
     }
     
@@ -45,10 +45,8 @@ class GKLevelDetailsViewController: UIViewController {
         
         let userInfo = notification.userInfo as! [String: AnyObject]
         let details = userInfo["InsideDetails"] as! NSDictionary?
-//        self.level1Details = details!["level1"] as! NSArray
-//        self.level1TableView.reloadData()
-        
-        print(details)
+        self.insideLevel1Details = details!["level1"] as! NSArray
+        self.insideLevel1DetailsTable.reloadData()
         
     }
     
@@ -88,8 +86,39 @@ class GKLevelDetailsViewController: UIViewController {
         }
     }
     
+    func getInsideLevel1DataHelper(department: String) {
+        
+        let url = "http://directory.karnataka.gov.in/getleveldata.php"
+        let body = "level1=".stringByAppendingString(department)
+        let insideLevel1DataAPIHelper = HTTPClient()
+        insideLevel1DataAPIHelper.delegate = self
+        insideLevel1DataAPIHelper.postRequest(url, body: body)
+        
+    }
     
-    func getInsideLevel1Data(department: String) {
+    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool) {
+        
+        
+        let responseFromServerDict = resultDict as! NSDictionary
+        
+        print("The result is: " + responseFromServerDict.description)
+        if resultDict["error"] as! Bool == false {
+            self.insideLevel1Details = responseFromServerDict["data"] as! NSArray
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.insideLevel1DetailsTable.reloadData()
+            }
+            
+        }
+        
+    }
+    
+    func didFailWithPOSTRequestError(resultStatus: Bool) {
+        print("Error")
+        self.showAlertWithMessage("Somethig went wrong")
+    }
+    
+    
+  /*  func getInsideLevel1Data(department: String) {
         
         let myURL = NSURL(string: "http://directory.karnataka.gov.in/getleveldata.php")!
         let request = NSMutableURLRequest(URL: myURL)
@@ -137,5 +166,6 @@ class GKLevelDetailsViewController: UIViewController {
         task.resume()
         
     }
+ */
 
 }

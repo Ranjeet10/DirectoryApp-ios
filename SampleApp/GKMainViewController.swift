@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate{
+class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTTPClientDelegate{
 
     var level1Details: NSArray = NSArray()
     var insideLevel1Details: NSArray = NSArray()
@@ -21,14 +21,16 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate{
         // Do any additional setup after loading the view.
         
         self.title = "Directory"
-      //  LibraryAPI.sharedInstance.downloadDataArray()
         self.customizeNavigationBar()
         self.level1TableView.estimatedRowHeight = 50
         self.level1TableView.rowHeight = UITableViewAutomaticDimension
-      //  NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(populateTable(_:)), name: "GKDetails", object: nil)
-        self.downloadData()
         
-        self.getLevel1Details()
+      //  NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(populateTable(_:)), name: "GKDetails", object: nil)
+      //  self.downloadData()
+        
+        self.getLevel1DataHelper()
+        
+      //  self.getLevel1Details()
         
         self.customizeNavigationBar()
         
@@ -128,52 +130,36 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate{
         }
     }
     
-    func getLevel1Details() {
-
-        let getLevel1: String = "http://directory.karnataka.gov.in/getlevel1.php"
-        guard let url = NSURL(string: getLevel1) else {
-            print("Error: cannot create URL")
-            return
-        }
-        let urlRequest = NSURLRequest(URL: url)
+    func getLevel1DataHelper() {
         
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config)
+        let url = "http://directory.karnataka.gov.in/getlevel1.php"
+        let level1DataAPIHelper = HTTPClient()
+        level1DataAPIHelper.delegate = self
+        level1DataAPIHelper.postRequest(url, body: "")
         
-        let task = session.dataTaskWithRequest(urlRequest) {
-            (data, response, error) in
-            guard let responseData = data else {
-                print("Error: did not receive data")
-                return
+    }
+    
+    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool) {
+        
+        
+        let responseFromServerDict = resultDict as! NSDictionary
+        
+        print("The result is: " + responseFromServerDict.description)
+        
+        if responseFromServerDict["error"] as! Bool == false {
+            self.level1Details = resultDict["level1"] as! NSArray
+            
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.level1TableView.reloadData()
             }
-            guard error == nil else {
-                print("error calling GET request")
-                print(error)
-                return
-            }
-            do {
-                guard let resultDict = try NSJSONSerialization.JSONObjectWithData(responseData, options: []) as? NSDictionary else {
-
-                    print("Couldn't convert received data to JSON dictionary")
-                    return
-                }
-                print("The result is: " + resultDict.description)
-                
-                if resultDict["error"] as! Bool == false {
-                    self.level1Details = resultDict["level1"] as! NSArray
-                    
-                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                        self.level1TableView.reloadData()
-                    }
-                    
-                }
-                
-                
-            } catch  {
-                print("error trying to convert data to JSON")
-            }
+            
         }
-        task.resume()
+        
+    }
+    
+    func didFailWithPOSTRequestError(resultStatus: Bool) {
+        print("Error")
+        self.showAlertWithMessage("Somethig went wrong")
     }
     
     func showCorrectAccesoryView(imageName: String) -> UIButton {
@@ -184,29 +170,6 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate{
         button.frame = frame
         button.setBackgroundImage(image, forState: .Normal)
         return button
-    }
-
-    func downloadData() {
-        
-        let aUrl = NSURL(string: "http://directory.karnataka.gov.in/getlevel1.php")
-        
-        let data = NSData(contentsOfURL: aUrl!)
-        
-        do {
-            guard let resultDict = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? NSDictionary else {
-                
-                print("Couldn't convert received data to JSON dictionary")
-                return
-            }
-            self.level1Details = resultDict.objectForKey("level1") as! NSArray
-            
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                self.level1TableView.reloadData()
-            }
-            
-        } catch  {
-            print("error trying to convert data to JSON")
-        }
     }
 
 }

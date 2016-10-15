@@ -89,56 +89,6 @@ class GKUpdatePasswordViewController: UIViewController,HTTPClientDelegate {
         self.showAlertWithMessage("Somethig went wrong")
     }
     
-    
- /*   func updatePassword() {
-        
-            let myURL = NSURL(string: "http://directory.karnataka.gov.in/updatepswrd.php")!
-            let request = NSMutableURLRequest(URL: myURL)
-            request.HTTPMethod = "POST"
-            request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-            let bodyStr = "mobile=8105991000&tableID=department2&password=hello1984"
-            request.HTTPBody = bodyStr.dataUsingEncoding(NSUTF8StringEncoding)
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-                data, response, error in
-                
-                guard let responseData = data else {
-                    print("Error: did not receive data")
-                    return
-                }
-                guard error == nil else {
-                    print("error calling GET request")
-                    print(error)
-                    return
-                }
-                
-                do {
-                    guard let resultDict = try NSJSONSerialization.JSONObjectWithData(responseData, options: []) as? NSDictionary else {
-                        
-                        print("Couldn't convert received data to JSON dictionary")
-                        return
-                    }
-                    print("The result is: " + resultDict.description)
-                    if resultDict["error"] as! Bool == false {
-                        
-                        self.receivedData = resultDict.objectForKey("user") as? NSDictionary
-                        
-                        print(self.receivedData!.objectForKey("name"))
-                        print(self.receivedData!.objectForKey("email"))
-                        self.showLoggedInHomePage()
-                        
-                    }
-                    
-                } catch  {
-                    print("error trying to convert data to JSON")
-                }
-                
-            }
-            task.resume()        
-                    
-    }
-  */
-    
     func showLoggedInHomePage() {
         
         let notification = NSNotification.init(name: "LoggedInMenu", object: self, userInfo: ["userDetails": self.receivedData!])

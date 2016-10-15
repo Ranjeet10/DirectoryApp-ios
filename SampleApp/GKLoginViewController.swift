@@ -77,29 +77,6 @@ class GKLoginViewController: UIViewController, HTTPClientDelegate{
     }
     
     
-/*    - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
-    {
-    switch (result) {
-    case MessageComposeResultCancelled:
-    NSLog(@"Cancelled");
-    break;
-    case MessageComposeResultFailed:
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"MyApp" message:@"Unknown Error"
-    delegate:self cancelButtonTitle:@”OK” otherButtonTitles: nil];
-    [alert show];
-    [alert release];
-    break;
-    case MessageComposeResultSent:
-    
-    break;
-    default:
-    break;
-}
-
-[self dismissModalViewControllerAnimated:YES];
-}*/
-    
-    
     
     func showAlert(message:String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -111,35 +88,6 @@ class GKLoginViewController: UIViewController, HTTPClientDelegate{
         
     }
     
-  /*  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "showLoginScreen" {
-            
-            let loginController:GKLoginAppViewController = segue.destinationViewController as! GKLoginAppViewController
-            loginController.phoneNumber = self.inputNumberField.text
-            //loginController.tableID = self.tableID!
-            //loginController.level1 = self.level1!
-            
-        }
-    }
- */
-    
-  /*  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "showUpdatePassword" {
-            
-            let updatePasswordController:GKUpdatePasswordViewController = segue.destinationViewController as! GKUpdatePasswordViewController
-            updatePasswordController.phoneNumber = inputNumberField.text
-            
-        }
-        
-        if segue.identifier == "verifyCodeSegue" {
-            
-            let verifyCodeController:GKVerifyCodeViewController = segue.destinationViewController as! GKVerifyCodeViewController
-            
-        }
-    }
- */
     
     func checkUserHelper() {
         
@@ -181,64 +129,5 @@ class GKLoginViewController: UIViewController, HTTPClientDelegate{
         print("Error")
         self.showAlertWithMessage("Somethig went wrong")
     }
-    
-    
-  /*  func checkUser(phoneNumber: String) {
-        
-        let myURL = NSURL(string: "http://directory.karnataka.gov.in/mobilecheck.php")!
-        let request = NSMutableURLRequest(URL: myURL)
-        request.HTTPMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        let bodyStr:String = "mobile=".stringByAppendingString(self.inputNumberField.text!)
-        request.HTTPBody = bodyStr.dataUsingEncoding(NSUTF8StringEncoding)
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            
-            
-            guard let responseData = data else {
-                print("Error: did not receive data")
-                return
-            }
-            guard error == nil else {
-                print("error calling GET request")
-                print(error)
-                return
-            }
-            
-            do {
-                guard let resultDict = try NSJSONSerialization.JSONObjectWithData(responseData, options: []) as? NSDictionary else {
-                    
-                    print("Couldn't convert received data to JSON dictionary")
-                    return
-                }
-                print("The result is: " + resultDict.description)
-                if resultDict["error"] as! Bool == false {
-                    
-                    let resultArray = resultDict.objectForKey("table") as! NSArray
-                    
-                    self.tableID = resultArray[0].objectForKey("tableID") as? String
-                    self.level1 = resultArray[0].objectForKey("level1") as? String
-                    
-                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                        self.performSegueWithIdentifier("showUpdatePassword", sender: self)
-                    }
-                    
-                }
-                else {
-                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                        self.showAlertWithMessage("User does not exist")
-                    }
-                }
-                
-            } catch  {
-                print("error trying to convert data to JSON")
-            }
-            
-        }
-        task.resume()
-        
-    }
- */
     
 }

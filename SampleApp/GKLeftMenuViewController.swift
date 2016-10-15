@@ -140,6 +140,14 @@ class GKLeftMenuViewController: UIViewController {
             
         }
         
+        
+        
+        if indexPath.row == 3 {
+            
+            displayShareSheet("link")
+            
+        }
+        
         if indexPath.row == 5 {
             
             self.menuItems = ["Login", "About App", "Sync", "Share", "Rate"]
@@ -150,8 +158,8 @@ class GKLeftMenuViewController: UIViewController {
                 self.menuTable.reloadData()
             }
             self.loggedIn = false
-            let mainViewController = storyboard.instantiateViewControllerWithIdentifier("GKMainViewController") as! GKMainViewController
-            let navVC = UINavigationController(rootViewController: mainViewController)
+            let loginViewController = storyboard.instantiateViewControllerWithIdentifier("GKLoginAppViewController") as! GKLoginAppViewController
+            let navVC = UINavigationController(rootViewController: loginViewController)
             self.slideMenuController()?.changeMainViewController(navVC, close: true)
             
         }
@@ -180,7 +188,11 @@ class GKLeftMenuViewController: UIViewController {
             let navVC = UINavigationController(rootViewController: loginViewController)
             self.slideMenuController()?.changeMainViewController(navVC, close: true)
         }
-    
     }
     
+    func displayShareSheet(shareContent:String) {
+        let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
+        presentViewController(activityViewController, animated: true, completion: {})
+    }
+   
 }
