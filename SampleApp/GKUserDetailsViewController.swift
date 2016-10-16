@@ -10,7 +10,7 @@ import UIKit
 
 class GKUserDetailsViewController: UIViewController {
 
-    let menuItems = ["profile", "profile", "profile"]
+    let menuItems = ["email", "contact", "location"]
     var insideLevel1Details: NSArray?
     var selectedIndex: Int?
     var individualInsideLevel1Detail: NSDictionary!
@@ -89,5 +89,45 @@ class GKUserDetailsViewController: UIViewController {
         
         return cell
     }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let userEmail = individualInsideLevel1Detail.objectForKey("email") as? String
+        let userMobile = individualInsideLevel1Detail.objectForKey("mobile") as? String
+        
+        if indexPath.row == 0 {
+            self.emailHandler(userEmail!)
+        }
+        if indexPath.row == 1 {
+            self.phoneHandler(userMobile!)
+        }
+        
+    }
+    
+    func emailHandler(emailAddress:String) {
+        
+        if let emailURL:NSURL = NSURL(string: "mailto://"+emailAddress) {
+            let application:UIApplication = UIApplication.sharedApplication()
+            if (application.canOpenURL(emailURL)) {
+                application.openURL(emailURL)
+            }
+        }
+    }
+    
+    func phoneHandler(mobileNo:String) {
+        
+        let cleanedString = (mobileNo.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "0123456789-+()").invertedSet))
+        
+        let stringPhoneNo = cleanedString.joinWithSeparator("")
+        
+        if let phoneCallURL:NSURL = NSURL(string: "tel://"+stringPhoneNo) {
+            let application:UIApplication = UIApplication.sharedApplication()
+            if (application.canOpenURL(phoneCallURL)) {
+                application.openURL(phoneCallURL);
+            }
+        }
+    }
+
 
 }

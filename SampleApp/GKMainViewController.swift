@@ -34,9 +34,10 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         
         self.customizeNavigationBar()
         
-        self.level1TableView.estimatedRowHeight = 100
+        self.level1TableView.estimatedRowHeight = 50
+
         self.level1TableView.rowHeight = UITableViewAutomaticDimension
-    
+        
     
     }
 
@@ -75,10 +76,12 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
                 
         if accessoryIndicatorNumber > 1 {
         
-            cell.accessoryView = self.showCorrectAccesoryView("insideLevelAccessory")
+           // cell.accessoryView = self.showCorrectAccesoryView("insideLevelAccessory")
+            cell.level1Image.image = UIImage(named: "insideLevelAccessory")
         }
         else {
-            cell.accessoryView = self.showCorrectAccesoryView("disclosureAccessory")
+          //  cell.accessoryView = self.showCorrectAccesoryView("disclosureAccessory")
+            cell.level1Image.image = UIImage(named: "disclosureAccessory")
         }
         
         return cell

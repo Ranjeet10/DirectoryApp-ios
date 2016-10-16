@@ -92,6 +92,34 @@ class GKLeftMenuViewController: UIViewController {
         cell.menuItemTitleLabel.text = menuItems[indexPath.row]
         cell.menuItemDescription.text = menuItemsDescription[indexPath.row]
         
+        switch indexPath.row {
+        case 0:
+            cell.imageView?.image = UIImage(named: "profile")
+            break
+        case 1:
+            if self.loggedIn {
+                cell.imageView?.image = UIImage(named: "editprofile")
+            }else{
+              cell.imageView?.image = UIImage(named: "about_app")
+            }
+            break
+        case 2:
+            cell.imageView?.image = UIImage(named: "logout")
+            break
+        case 3:
+            cell.imageView?.image = UIImage(named: "share")
+            break
+        case 4:
+            cell.imageView?.image = UIImage(named: "rate")
+            break
+        case 5:
+            cell.imageView?.image = UIImage(named: "logout")
+            break
+        default:
+            break
+        }
+ 
+        
         return cell
     }
     
@@ -99,9 +127,38 @@ class GKLeftMenuViewController: UIViewController {
         
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         
+        if indexPath.row == 0 {
+            
+            if self.loggedIn {
+                
+                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                
+                let viewMyProfile: GKUserDetailsViewController = storyboard.instantiateViewControllerWithIdentifier("GKUserDetailsViewController") as! GKUserDetailsViewController
+                
+                viewMyProfile.profileDetails = self.profileDetails
+                viewMyProfile.showMyProfile = true
+                
+                let navVC = UINavigationController(rootViewController: viewMyProfile)
+                self.slideMenuController()?.changeMainViewController(navVC, close: true)
+                
+                
+            }else {
+                self.checkDefaultsAndShowRespectivePage()
+            }
+            
+            
+        }
+        
+        
         if indexPath.row == 1 {
             
            if self.loggedIn {
+            
+            let editProfileViewController = storyboard.instantiateViewControllerWithIdentifier("GKEditProfileViewController") as! GKEditProfileViewController
+            
+            let navVC = UINavigationController(rootViewController: editProfileViewController)
+            self.slideMenuController()?.changeMainViewController(navVC, close: true)
+            
             
            }
             
@@ -118,27 +175,7 @@ class GKLeftMenuViewController: UIViewController {
             
         }
         
-        if indexPath.row == 0 {
-            
-            if self.loggedIn {
-                
-                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-                
-                let viewMyProfile: GKUserDetailsViewController = storyboard.instantiateViewControllerWithIdentifier("GKUserDetailsViewController") as! GKUserDetailsViewController
-                
-                viewMyProfile.profileDetails = self.profileDetails
-                viewMyProfile.showMyProfile = true
-                
-                let navVC = UINavigationController(rootViewController: viewMyProfile)
-                self.slideMenuController()?.changeMainViewController(navVC, close: true)
-    
-                
-            }else {
-                self.checkDefaultsAndShowRespectivePage()
-            }
-           
-            
-        }
+        
         
         
         

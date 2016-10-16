@@ -40,7 +40,7 @@ extension UIViewController {
                                                           style: UIBarButtonItemStyle.Plain,
                                                           target: self,
                                                           action:#selector(UIViewController.toggleLeft))
-        //navigationItem.rightBarButtonItem = leftButton;
+        leftButton.tintColor = UIColor.whiteColor()
         navigationItem.leftBarButtonItem = leftButton
     }
     
@@ -51,15 +51,17 @@ extension UIViewController {
     //MARK: Customizing menu controllers navigation
     
     func customizeNavigationBar() {
+        
         self.addTitleView(self.navigationItem)
         self.addLeftBarButtonItems()
-        navigationController!.navigationBar.barTintColor = UIColor.brownColor()
+        navigationController!.navigationBar.barTintColor = self.getUIColorFromHexaString("#D71C25")
     }
     
     func customizeDetailViewsNavigationBar() {
+        
         self.addBackButton()
         self.addTitleView(self.navigationItem)
-        navigationController!.navigationBar.barTintColor = UIColor.brownColor()
+        navigationController!.navigationBar.barTintColor = self.getUIColorFromHexaString("#D71C25")
     }
     
     private func addBackButton() {
@@ -67,6 +69,7 @@ extension UIViewController {
                                                    style: UIBarButtonItemStyle.Plain,
                                                    target: self,
                                                    action: #selector(self.popView))
+        back.tintColor = UIColor.whiteColor()
         navigationItem.leftBarButtonItem = back
     }
     
@@ -78,6 +81,7 @@ extension UIViewController {
                                                           style: UIBarButtonItemStyle.Plain,
                                                           target: self,
                                                           action:#selector(UIViewController.toggleLeft))
+        leftButton.tintColor = UIColor.whiteColor()
         
         navigationItem.leftBarButtonItems = [leftButton]
     }
@@ -112,6 +116,33 @@ extension UIViewController {
     public func closeLeft() {
         slideMenuController()?.closeLeft()
     }
+    
+    func getUIColorFromHexaString(hexString: String) -> UIColor {
+        let r, g, b, a: CGFloat
+        
+        let hexStringWithAlpha = hexString.stringByAppendingString("ff")
+        
+        if hexStringWithAlpha.hasPrefix("#") {
+            let start = hexStringWithAlpha.startIndex.advancedBy(1)
+            let hexColor = hexStringWithAlpha.substringFromIndex(start)
+            
+            if hexColor.characters.count == 8 {
+                let scanner = NSScanner(string: hexColor)
+                var hexNumber: UInt64 = 0
+                
+                if scanner.scanHexLongLong(&hexNumber) {
+                    r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
+                    g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
+                    b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
+                    a = CGFloat(hexNumber & 0x000000ff) / 255
+                    return UIColor.init(red: r, green: g, blue: b, alpha: a)
+                }
+            }
+        }
+        
+        return UIColor.clearColor()
+    }
+
     
 }
 
