@@ -25,7 +25,11 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
 
         // Do any additional setup after loading the view.
         
-        self.phoneNumberLabel.text = phoneNumber
+        self.title = "Login"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.getNumberFromUserDefaults()
+        
+        //self.phoneNumberLabel.text = phoneNumber
         
        // self.checkUser("")
         self.checkUserHelper()
@@ -63,7 +67,7 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
     func checkUserHelper() {
         
         let url = GKConstants.sharedInstanse.checkUserAPI
-        let body = "mobile=".stringByAppendingString("8105991000")
+        let body = "mobile=".stringByAppendingString(self.phoneNumber!)
         let checkUserAPIHelper = HTTPClient()
         checkUserAPIHelper.delegate = self
         checkUserAPIHelper.postRequest(url, body: body)
@@ -104,7 +108,10 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        let bodyStr = "mobile=8105991000&tableID=department2&password=".stringByAppendingString(self.enterPasswordText.text!)
+        
+        let bodyStr = "mobile=".stringByAppendingString(self.phoneNumber!).stringByAppendingString("&tableID=").stringByAppendingString(self.tableID).stringByAppendingString("&password=").stringByAppendingString(enterPasswordText.text!)
+        
+//        let bodyStr = "mobile=8105991000&tableID=department2&password=".stringByAppendingString(self.enterPasswordText.text!)
         request.HTTPBody = bodyStr.dataUsingEncoding(NSUTF8StringEncoding)
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             data, response, error in
@@ -163,6 +170,18 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
             self.popView()
         }
         
+    }
+    
+    func getNumberFromUserDefaults() {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if let phoneNumber = defaults.valueForKey("PhoneNumber") as? String {
+            
+            self.phoneNumber = phoneNumber
+            self.phoneNumberLabel.text = self.phoneNumber
+            
+        }
     }
     
     

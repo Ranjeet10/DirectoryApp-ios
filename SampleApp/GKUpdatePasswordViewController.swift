@@ -18,13 +18,17 @@ class GKUpdatePasswordViewController: UIViewController,HTTPClientDelegate {
     var newPassword: String?
     var phoneNumber: String?
     var receivedData: NSDictionary?
+    var userPhoneNumber: String?
+    var departamentName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.title = "Forgot Password"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
-        self.phoneNumberLabel.text = phoneNumber
+        self.phoneNumberLabel.text = self.userPhoneNumber
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,7 +64,7 @@ class GKUpdatePasswordViewController: UIViewController,HTTPClientDelegate {
     func updatePasswordHelper() {
         
         let url = GKConstants.sharedInstanse.updatePasswordAPI
-        let body = "mobile=8105991000&tableID=department2&password=hello1984"
+        let body = "mobile=".stringByAppendingString(self.userPhoneNumber!).stringByAppendingString("&tableID=").stringByAppendingString(departamentName!).stringByAppendingString("&password=").stringByAppendingString(self.newPassword!)
         let updatePasswordAPIHelper = HTTPClient()
         updatePasswordAPIHelper.delegate = self
         updatePasswordAPIHelper.postRequest(url, body: body)
@@ -95,7 +99,8 @@ class GKUpdatePasswordViewController: UIViewController,HTTPClientDelegate {
         NSNotificationCenter.defaultCenter().postNotification(notification)
         
         let defaults = NSUserDefaults.standardUserDefaults()
-           defaults.setBool(true, forKey: "hasLoggedInSecond")
+        defaults.setBool(true, forKey: "hasLoggedInSecond")
+        defaults.setObject(self.userPhoneNumber, forKey: "PhoneNumber")
         
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.popView()

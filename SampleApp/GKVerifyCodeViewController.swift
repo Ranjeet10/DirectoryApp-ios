@@ -15,11 +15,19 @@ class GKVerifyCodeViewController: UIViewController {
     @IBOutlet weak var editMobileNumberButton: UIButton!
     
     var randNum: String!
+    var phoneNumber: String?
+    var tabelID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.title = "Verify Code"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        self.customizeDetailViewsNavigationBar()
+
+        
         self.generateRandomNumbers()
     }
 
@@ -74,5 +82,17 @@ class GKVerifyCodeViewController: UIViewController {
         self.codeTextField.text! = "\(number)"
         self.randNum = "\(number)"
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showUpdatePasswordSegue" {
+            
+            let updatePasswordController: GKUpdatePasswordViewController = segue.destinationViewController as! GKUpdatePasswordViewController
+            
+            updatePasswordController.userPhoneNumber = self.phoneNumber
+            updatePasswordController.departamentName = self.tabelID
+            
+            
+        }
     }
 }

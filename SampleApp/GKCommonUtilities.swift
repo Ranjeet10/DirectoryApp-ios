@@ -142,6 +142,30 @@ extension UIViewController {
         
         return UIColor.clearColor()
     }
+    
+    func getImageFromDocuments() -> UIImage {
+        
+        var imageFetched: UIImage!
+        do {
+            let fileManager = NSFileManager.defaultManager()
+            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+            let imagePAth = (documentsPath as NSString).stringByAppendingPathComponent("profilePic.jpg")
+            if fileManager.fileExistsAtPath(imagePAth){
+                imageFetched = UIImage(contentsOfFile: imagePAth)
+            }else{
+                imageFetched = UIImage()
+            }
+            
+        }
+        return imageFetched
+    }
+    
+    func saveImageToDocuments(image: UIImage) {
+        let fileManager = NSFileManager.defaultManager()
+        let paths = (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString).stringByAppendingPathComponent("profilePic.jpg")
+        let imageData = UIImageJPEGRepresentation(image, 0.5)
+        fileManager.createFileAtPath(paths as String, contents: imageData, attributes: nil)
+    }
 
     
 }

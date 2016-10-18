@@ -21,6 +21,7 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         // Do any additional setup after loading the view.
         
         self.title = "Directory"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.customizeNavigationBar()
         self.level1TableView.estimatedRowHeight = 50
         self.level1TableView.rowHeight = UITableViewAutomaticDimension

@@ -155,6 +155,8 @@ class GKLeftMenuViewController: UIViewController {
            if self.loggedIn {
             
             let editProfileViewController = storyboard.instantiateViewControllerWithIdentifier("GKEditProfileViewController") as! GKEditProfileViewController
+            editProfileViewController.profileDetails = self.profileDetails
+            editProfileViewController.showMyProfile = true
             
             let navVC = UINavigationController(rootViewController: editProfileViewController)
             self.slideMenuController()?.changeMainViewController(navVC, close: true)

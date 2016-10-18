@@ -17,6 +17,9 @@ class GKLoginViewController: UIViewController, HTTPClientDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Get Code"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
         // Do any additional setup after loading the view.
         self.customizeDetailViewsNavigationBar()
        // self.checkUser("")
@@ -41,7 +44,15 @@ class GKLoginViewController: UIViewController, HTTPClientDelegate{
     
     
     @IBAction func sendInAppSMS(sender: AnyObject) {
-        self.checkUserHelper()
+        
+        if self.inputNumberField.text != "" {
+            self.checkUserHelper()
+        }
+        else {
+            self.showAlertWithMessage("Please enter a number")
+        }
+
+        
     
      /*   if MFMessageComposeViewController.canSendText() {
             
@@ -128,6 +139,17 @@ class GKLoginViewController: UIViewController, HTTPClientDelegate{
     func didFailWithPOSTRequestError(resultStatus: Bool) {
         print("Error")
         self.showAlertWithMessage("Somethig went wrong")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "verifyCodeSegue" {
+            let verifyCodeController: GKVerifyCodeViewController = segue.destinationViewController as! GKVerifyCodeViewController
+            
+            verifyCodeController.phoneNumber = self.inputNumberField.text
+            verifyCodeController.tabelID =  self.tableID
+            
+        }
     }
     
 }

@@ -12,7 +12,8 @@ class GKAboutAppViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "About App"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         // Do any additional setup after loading the view.
         self.customizeDetailViewsNavigationBar()
     }

@@ -15,12 +15,14 @@ class GKUserDetailsViewController: UIViewController {
     var selectedIndex: Int?
     var individualInsideLevel1Detail: NSDictionary!
     
+    
     @IBOutlet weak var userDetailsTableView: UITableView!
     
     
     @IBOutlet weak var userDepartmentLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userPositionLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
     
     var userDepartment: String?
     var userName: String?
@@ -32,14 +34,24 @@ class GKUserDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.customizeDetailViewsNavigationBar()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         if self.showMyProfile! {
             self.individualInsideLevel1Detail = profileDetails
-            self.customizeDetailViewsNavigationBar()
+            self.title = "My Profile"
+            let imageFetched = self.getImageFromDocuments()
+            self.profileImageView.contentMode = .ScaleToFill
+            self.profileImageView.layer.borderWidth = 1
+            self.profileImageView.layer.masksToBounds = false
+            self.profileImageView.layer.cornerRadius = profileImageView.frame.height/2
+            self.profileImageView.clipsToBounds = true
+            self.profileImageView.image = imageFetched
         }
         
         else {
             self.individualInsideLevel1Detail = insideLevel1Details![selectedIndex!] as! NSDictionary
+            self.title = "Profile"
             
         }
         
@@ -54,6 +66,7 @@ class GKUserDetailsViewController: UIViewController {
         
         self.userDetailsTableView.estimatedRowHeight = 100
         self.userDetailsTableView.rowHeight = UITableViewAutomaticDimension
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -128,6 +141,4 @@ class GKUserDetailsViewController: UIViewController {
             }
         }
     }
-
-
 }
