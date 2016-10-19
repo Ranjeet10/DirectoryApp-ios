@@ -17,6 +17,7 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
     var userName: String?
     var userPosition: String?
     var userPhoneNumber: String?
+    var uploadPhotoRequest = false
     
     var imagePicker = UIImagePickerController()
     @IBOutlet weak var profileImageView: UIImageView!
@@ -80,10 +81,6 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
         
     }
     
-    @IBAction func uploadPhoto(sender: AnyObject) {
-        
-    }
-    
     func updatePasswordHelper() {
         
         let url = GKConstants.sharedInstanse.updatePasswordAPI
@@ -93,7 +90,7 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
         updatePasswordAPIHelper.postRequest(url, body: body)
     }
     
-    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool) {
+    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String) {
         
         
         let responseFromServerDict = resultDict as! NSDictionary
@@ -101,19 +98,30 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
         print("The result is: " + responseFromServerDict.description)
         if responseFromServerDict["error"] as! Bool == false {
             
-            self.receivedData = resultDict.objectForKey("user") as? NSDictionary
+            if uploadPhotoRequest {
+                print("Success")
+            }
+            else {
+                
+                self.receivedData = resultDict.objectForKey("user") as? NSDictionary
+                
+                print(self.receivedData!.objectForKey("name"))
+                print(self.receivedData!.objectForKey("email"))
+                self.showLoggedInHomePage()
+
+            }
             
-            print(self.receivedData!.objectForKey("name"))
-            print(self.receivedData!.objectForKey("email"))
-            self.showLoggedInHomePage()
+            
             
         }
+        self.uploadPhotoRequest = false
         
     }
     
     func didFailWithPOSTRequestError(resultStatus: Bool) {
         print("Error")
         self.showAlertWithMessage("Somethig went wrong")
+        self.uploadPhotoRequest = false
     }
     
     func showLoggedInHomePage() {
@@ -144,6 +152,8 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
             profileImageView.image = pickedImage
             //Save image
             self.saveImageToDocuments(pickedImage)
+            self.encodeImageAndUpload(pickedImage)
+            self.uploadPhotoRequest = true
         }
         
         dismissViewControllerAnimated(true, completion: nil)
@@ -190,6 +200,23 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
         
         return newImage
     }
-
+    
+    func encodeImageAndUpload(image: UIImage) {
+        
+        let imageData:NSData = UIImagePNGRepresentation(image)!
+        let strBase64Representation:String = imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+        self.uploadPhotoToServer(strBase64Representation)
+        
+    }
+    
+    func uploadPhotoToServer(imageRepresentationInBase64: String) {
+        
+        let url = GKConstants.sharedInstanse.uploadPhotoAPI
+        let body = "mobile=8105991000&tableID=department2&image=".stringByAppendingString(imageRepresentationInBase64)
+        let uploadPhotoAPIHelper = HTTPClient()
+        uploadPhotoAPIHelper.delegate = self
+        uploadPhotoAPIHelper.postRequest(url, body: body)
+                    
+    }
 
 }

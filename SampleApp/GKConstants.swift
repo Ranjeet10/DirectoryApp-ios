@@ -16,6 +16,7 @@ class GKConstants: NSObject {
     let checkUserAPI = "http://directory.karnataka.gov.in/mobilecheck.php"
     let loginUserAPI = "http://directory.karnataka.gov.in/checkpassword.php"
     let updatePasswordAPI = "http://directory.karnataka.gov.in/updatepswrd.php"
+    let uploadPhotoAPI = "http://directory.karnataka.gov.in/upload.php"
     
     
     /* ============== Singleton =============== */

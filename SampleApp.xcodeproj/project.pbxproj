@@ -26,6 +26,8 @@
 		5DB880D91DAFB484001B2D42 /* GKSlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB880D81DAFB484001B2D42 /* GKSlideMenuViewController.swift */; };
 		5DB880DB1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB880DA1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift */; };
 		5DB880DD1DAFB519001B2D42 /* UserDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB880DC1DAFB519001B2D42 /* UserDetailsTableViewCell.swift */; };
+		5DBDA8541DB7412600233675 /* DataLibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDA8531DB7412600233675 /* DataLibraryAPI.swift */; };
+		5DE530F51DB784DD00B6716C /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE530F41DB784DD00B6716C /* PersistencyManager.swift */; };
 		5DE6DD6C1DA4E67A00DC4E10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6DD6B1DA4E67A00DC4E10 /* AppDelegate.swift */; };
 		5DE6DD731DA4E67A00DC4E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DE6DD721DA4E67A00DC4E10 /* Assets.xcassets */; };
 		5DE6DD761DA4E67A00DC4E10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DE6DD741DA4E67A00DC4E10 /* LaunchScreen.storyboard */; };
@@ -52,6 +54,8 @@
 		5DB880D81DAFB484001B2D42 /* GKSlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKSlideMenuViewController.swift; sourceTree = "<group>"; };
 		5DB880DA1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKLeftMenuViewController.swift; sourceTree = "<group>"; };
 		5DB880DC1DAFB519001B2D42 /* UserDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		5DBDA8531DB7412600233675 /* DataLibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLibraryAPI.swift; sourceTree = "<group>"; };
+		5DE530F41DB784DD00B6716C /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
 		5DE6DD681DA4E67900DC4E10 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE6DD6B1DA4E67A00DC4E10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DE6DD721DA4E67A00DC4E10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 			isa = PBXGroup;
 			children = (
 				5D4105C81DAB96B6003E82C2 /* HTTPClient.swift */,
+				5DBDA8531DB7412600233675 /* DataLibraryAPI.swift */,
+				5DE530F41DB784DD00B6716C /* PersistencyManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -214,10 +220,12 @@
 				5D30B2A41DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift in Sources */,
 				5DB880D91DAFB484001B2D42 /* GKSlideMenuViewController.swift in Sources */,
 				5D8A7F5D1DB3D2D700C557C1 /* GKEditProfileViewController.swift in Sources */,
+				5DE530F51DB784DD00B6716C /* PersistencyManager.swift in Sources */,
 				5D30B2A01DA64F550049C0B0 /* GKCommonUtilities.swift in Sources */,
 				5D9EA5CC1DB1E6B800CE96FC /* GKConstants.swift in Sources */,
 				5DB880DB1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift in Sources */,
 				5D4703471DB1015A00C41DB2 /* GKLoginAppViewController.swift in Sources */,
+				5DBDA8541DB7412600233675 /* DataLibraryAPI.swift in Sources */,
 				5D7CCEF41DA5378000853E20 /* GKAboutAppViewController.swift in Sources */,
 				5DA4C0221DA6D01C008FFEF2 /* GKUserDetailsViewController.swift in Sources */,
 				5DE6DD7E1DA4E8C900DC4E10 /* GKMainViewController.swift in Sources */,

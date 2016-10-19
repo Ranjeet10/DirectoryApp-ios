@@ -4,8 +4,8 @@ import UIKit
 @objc protocol HTTPClientDelegate{
     
     
-    optional func didPerformGETRequestSuccessfully(resultDict:AnyObject,resultStatus:Bool)
-    optional func didPerformPOSTRequestSuccessfully(resultDict:AnyObject,resultStatus:Bool)
+    optional func didPerformGETRequestSuccessfully(resultDict:AnyObject,resultStatus:Bool, url: String)
+    optional func didPerformPOSTRequestSuccessfully(resultDict:AnyObject,resultStatus:Bool, url: String)
     optional func didFailWithGETRequestError(resultStatus:Bool)
     optional func didFailWithPOSTRequestError(resultStatus:Bool)
     
@@ -38,7 +38,7 @@ class HTTPClient {
                 return
             }
             guard error == nil else {
-                print("error calling GET request")
+                print("error calling POST request")
                 print(error)
                 return
             }
@@ -49,7 +49,7 @@ class HTTPClient {
                     print("Couldn't convert received data to JSON dictionary")
                     return
                 }
-                self.delegate?.didPerformPOSTRequestSuccessfully!(resultDict, resultStatus: true)
+                self.delegate?.didPerformPOSTRequestSuccessfully!(resultDict, resultStatus: true, url:url)
                 print("The result is: " + resultDict.description)
                 
             } catch  {

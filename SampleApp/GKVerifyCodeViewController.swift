@@ -93,6 +93,11 @@ class GKVerifyCodeViewController: UIViewController {
             updatePasswordController.departamentName = self.tabelID
             
             
+            let backItem = UIBarButtonItem()
+            backItem.title = ""
+            backItem.setBackButtonBackgroundImage(UIImage(named: "back_white"), forState: .Normal, barMetrics: .Default)
+            navigationItem.backBarButtonItem = backItem
+            
         }
     }
 }

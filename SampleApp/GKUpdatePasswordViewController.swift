@@ -70,7 +70,7 @@ class GKUpdatePasswordViewController: UIViewController,HTTPClientDelegate {
         updatePasswordAPIHelper.postRequest(url, body: body)
     }
     
-    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool) {
+    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String) {
         
         
         let responseFromServerDict = resultDict as! NSDictionary

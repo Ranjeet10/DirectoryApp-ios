@@ -26,7 +26,9 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         self.level1TableView.estimatedRowHeight = 50
         self.level1TableView.rowHeight = UITableViewAutomaticDimension
         
-      //  NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(populateTable(_:)), name: "GKDetails", object: nil)
+      //  DataLibraryAPI.sharedInstance.getLevel1Details("helloFile")
+        
+      //  NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(populateTable(_:)), name: "GKLevel1Details", object: nil)
       //  self.downloadData()
         
         self.getLevel1DataHelper()
@@ -38,6 +40,8 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         self.level1TableView.estimatedRowHeight = 50
 
         self.level1TableView.rowHeight = UITableViewAutomaticDimension
+        
+        
         
     
     }
@@ -52,7 +56,9 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         let userInfo = notification.userInfo as! [String: AnyObject]
         let details = userInfo["details"] as! NSDictionary?
         self.level1Details = details!["level1"] as! NSArray
-        self.level1TableView.reloadData()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.level1TableView.reloadData()
+        }
         
     }
 
@@ -143,7 +149,7 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         
     }
     
-    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool) {
+    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String) {
         
         
         let responseFromServerDict = resultDict as! NSDictionary
