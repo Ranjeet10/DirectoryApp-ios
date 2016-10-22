@@ -19,7 +19,9 @@ class GKLeftMenuViewController: UIViewController {
     var loggedIn = false
     
     var profileDetails: NSDictionary?
-        
+    
+    var progressVC: GKProgressViewController?
+    
     @IBOutlet weak var menuTopView: UIView!
     
     @IBOutlet weak var menuTable: UITableView!
@@ -27,6 +29,8 @@ class GKLeftMenuViewController: UIViewController {
     @IBOutlet weak var username: UILabel!
     
     @IBOutlet weak var userShortDetails: UILabel!
+    
+    @IBOutlet weak var profileImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +45,7 @@ class GKLeftMenuViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(showPostLoginMenu), name: "LoggedInMenu", object: nil)
         
         
-            
+        
         // Do any additional setup after loading the view.
         
     }
@@ -52,6 +56,11 @@ class GKLeftMenuViewController: UIViewController {
     }
     
     
+    override func viewDidAppear(animated: Bool) {
+        
+        
+    }
+    
     func showPostLoginMenu(notification: NSNotification) {
         
         let userInfo = notification.userInfo as! [String: AnyObject]
@@ -60,25 +69,22 @@ class GKLeftMenuViewController: UIViewController {
         
         self.menuItems = ["My Profile","Edit Profile", "Sync", "Share", "Rate", "Logout"]
         self.menuItemsDescription = ["View your details", "Edit your Profile", "Sync Database", "Share with your friends", "Rate app on App Store", "Logout from your account"]
-       self.loggedIn = true
+        self.loggedIn = true
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.username.text = self.profileDetails?.objectForKey("name") as? String
             self.userShortDetails.text = self.profileDetails?.objectForKey("position") as? String
-             self.menuTable.reloadData()
+            self.menuTable.reloadData()
+            self.profileImage.contentMode = .ScaleToFill
+            self.profileImage.layer.borderWidth = 1
+            self.profileImage.layer.masksToBounds = false
+            self.profileImage.layer.cornerRadius = self.profileImage.frame.height/2
+            self.profileImage.clipsToBounds = true
+            self.profileImage.image = self.getImageFromDocuments()
+            
         }
         
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     //MARK: TableView Delegate Methods
     
@@ -100,7 +106,7 @@ class GKLeftMenuViewController: UIViewController {
             if self.loggedIn {
                 cell.imageView?.image = UIImage(named: "editprofile")
             }else{
-              cell.imageView?.image = UIImage(named: "about_app")
+                cell.imageView?.image = UIImage(named: "about_app")
             }
             break
         case 2:
@@ -118,7 +124,7 @@ class GKLeftMenuViewController: UIViewController {
         default:
             break
         }
- 
+        
         
         return cell
     }
@@ -152,38 +158,49 @@ class GKLeftMenuViewController: UIViewController {
         
         if indexPath.row == 1 {
             
-           if self.loggedIn {
-            
-            let editProfileViewController = storyboard.instantiateViewControllerWithIdentifier("GKEditProfileViewController") as! GKEditProfileViewController
-            editProfileViewController.profileDetails = self.profileDetails
-            editProfileViewController.showMyProfile = true
-            
-            let navVC = UINavigationController(rootViewController: editProfileViewController)
-            self.slideMenuController()?.changeMainViewController(navVC, close: true)
-            
-            
-           }
-            
-           else {
-            
-            
-            let aboutAppViewController = storyboard.instantiateViewControllerWithIdentifier("GKAboutAppViewController") as! GKAboutAppViewController
-            
-            let navVC = UINavigationController(rootViewController: aboutAppViewController)
-            self.slideMenuController()?.changeMainViewController(navVC, close: true)
-            
+            if self.loggedIn {
+                
+                let editProfileViewController = storyboard.instantiateViewControllerWithIdentifier("GKEditProfileViewController") as! GKEditProfileViewController
+                editProfileViewController.profileDetails = self.profileDetails
+                editProfileViewController.showMyProfile = true
+                
+                let navVC = UINavigationController(rootViewController: editProfileViewController)
+                self.slideMenuController()?.changeMainViewController(navVC, close: true)
+                
+                
+            }
+                
+            else {
+                
+                
+                let aboutAppViewController = storyboard.instantiateViewControllerWithIdentifier("GKAboutAppViewController") as! GKAboutAppViewController
+                
+                let navVC = UINavigationController(rootViewController: aboutAppViewController)
+                self.slideMenuController()?.changeMainViewController(navVC, close: true)
+                
             }
             
             
         }
         
-        
+        if indexPath.row == 2 {
+            
+            let appdelegate:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+            appdelegate.setupRootViewController(true)
+            
+        }
         
         
         
         if indexPath.row == 3 {
             
             displayShareSheet("link")
+            
+        }
+        
+        if indexPath.row == 4 {
+            
+            UIApplication.sharedApplication().openURL(NSURL(fileURLWithPath: "https://itunes.com/apps/appname"))
             
         }
         
@@ -233,5 +250,9 @@ class GKLeftMenuViewController: UIViewController {
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: {})
     }
-   
+    
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
 }

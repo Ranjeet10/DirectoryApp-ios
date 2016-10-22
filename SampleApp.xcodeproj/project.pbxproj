@@ -15,6 +15,8 @@
 		5D4105CB1DAB96B6003E82C2 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4105C81DAB96B6003E82C2 /* HTTPClient.swift */; };
 		5D4703471DB1015A00C41DB2 /* GKLoginAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */; };
 		5D4703491DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */; };
+		5D68D0991DB949C000B20D98 /* GKProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D68D0951DB949C000B20D98 /* GKProgressViewController.xib */; };
+		5D68D09A1DB949C000B20D98 /* GKProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D68D0961DB949C000B20D98 /* GKProgressViewController.swift */; };
 		5D79A6AA1DA5804900F1BBB6 /* Level1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A6A91DA5804900F1BBB6 /* Level1TableViewCell.swift */; };
 		5D79A6AC1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A6AB1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift */; };
 		5D7CCEF11DA5360800853E20 /* LeftMenuItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7CCEEF1DA5360800853E20 /* LeftMenuItemTableViewCell.swift */; };
@@ -43,6 +45,8 @@
 		5D4105C81DAB96B6003E82C2 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKLoginAppViewController.swift; sourceTree = "<group>"; };
 		5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKUpdatePasswordViewController.swift; sourceTree = "<group>"; };
+		5D68D0951DB949C000B20D98 /* GKProgressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKProgressViewController.xib; sourceTree = "<group>"; };
+		5D68D0961DB949C000B20D98 /* GKProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKProgressViewController.swift; sourceTree = "<group>"; };
 		5D79A6A91DA5804900F1BBB6 /* Level1TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level1TableViewCell.swift; sourceTree = "<group>"; };
 		5D79A6AB1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKLevelDetailsViewController.swift; sourceTree = "<group>"; };
 		5D7CCEEF1DA5360800853E20 /* LeftMenuItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -75,6 +79,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D68D0931DB949AA00B20D98 /* DataProgress */ = {
+			isa = PBXGroup;
+			children = (
+				5D68D0951DB949C000B20D98 /* GKProgressViewController.xib */,
+				5D68D0961DB949C000B20D98 /* GKProgressViewController.swift */,
+			);
+			path = DataProgress;
+			sourceTree = "<group>";
+		};
 		5D79A6A31DA56B9800F1BBB6 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +134,7 @@
 				5D9EA5E01DB20E0C00CE96FC /* Commons */,
 				5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */,
 				5D7CCEEF1DA5360800853E20 /* LeftMenuItemTableViewCell.swift */,
+				5D68D0931DB949AA00B20D98 /* DataProgress */,
 				5DB880DA1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift */,
 				5DB880D81DAFB484001B2D42 /* GKSlideMenuViewController.swift */,
 				5D79A6A91DA5804900F1BBB6 /* Level1TableViewCell.swift */,
@@ -201,6 +215,7 @@
 				5D30B2AA1DA675000049C0B0 /* Main.storyboard in Resources */,
 				5DE6DD761DA4E67A00DC4E10 /* LaunchScreen.storyboard in Resources */,
 				5DE6DD731DA4E67A00DC4E10 /* Assets.xcassets in Resources */,
+				5D68D0991DB949C000B20D98 /* GKProgressViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +238,7 @@
 				5DE530F51DB784DD00B6716C /* PersistencyManager.swift in Sources */,
 				5D30B2A01DA64F550049C0B0 /* GKCommonUtilities.swift in Sources */,
 				5D9EA5CC1DB1E6B800CE96FC /* GKConstants.swift in Sources */,
+				5D68D09A1DB949C000B20D98 /* GKProgressViewController.swift in Sources */,
 				5DB880DB1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift in Sources */,
 				5D4703471DB1015A00C41DB2 /* GKLoginAppViewController.swift in Sources */,
 				5DBDA8541DB7412600233675 /* DataLibraryAPI.swift in Sources */,

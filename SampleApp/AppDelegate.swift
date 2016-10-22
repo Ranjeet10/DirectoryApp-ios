@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SystemConfiguration
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var mainController:GKMainViewController?
     var leftviewController:GKLeftMenuViewController?
     var slideMenuController:GKSlideMenuViewController?
+    var level1Details: NSDictionary?
     
     override init() {
         super.init()
@@ -31,7 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let initialViewController = UIViewController()
         self.window!.rootViewController = initialViewController
         self.window!.makeKeyAndVisible()
-        self.setupRootViewController()
+        self.setupRootViewController(false)
+        
+        
+        if self.isConnectedToNetwork() == false {
+            self.showAlertWithMessage("No Internet connection")
+        }
         
         return true
     }
@@ -57,14 +64,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+
     
     
     
-    func setupRootViewController() {
+    func setupRootViewController(syncData: Bool) {
         
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         
         self.mainController = storyboard.instantiateViewControllerWithIdentifier("GKMainViewController") as? GKMainViewController
+        self.mainController?.syncDataFlag = syncData
         
         self.leftviewController = storyboard.instantiateViewControllerWithIdentifier("GKLeftMenuViewController") as? GKLeftMenuViewController
         
@@ -79,5 +88,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window!.rootViewController = slideMenuController
         
+    }
+    
+    func isConnectedToNetwork() -> Bool {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+        }
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        return (isReachable && !needsConnection)
+    }
+    
+    
+    func showAlertWithMessage(message:String, handler:()?=nil) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {action in
+            handler
+        }))
+        self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
     }
 }

@@ -4,8 +4,8 @@ import UIKit
 @objc protocol HTTPClientDelegate{
     
     
-    optional func didPerformGETRequestSuccessfully(resultDict:AnyObject,resultStatus:Bool, url: String)
-    optional func didPerformPOSTRequestSuccessfully(resultDict:AnyObject,resultStatus:Bool, url: String)
+    optional func didPerformGETRequestSuccessfully(resultDict:AnyObject,resultStatus:Bool, url: String, body: String)
+    optional func didPerformPOSTRequestSuccessfully(resultDict:AnyObject,resultStatus:Bool, url: String, body: String)
     optional func didFailWithGETRequestError(resultStatus:Bool)
     optional func didFailWithPOSTRequestError(resultStatus:Bool)
     
@@ -30,6 +30,9 @@ class HTTPClient {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         let bodyStr:String = body
         request.HTTPBody = bodyStr.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        print(request)
+        
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             data, response, error in
             
@@ -49,7 +52,7 @@ class HTTPClient {
                     print("Couldn't convert received data to JSON dictionary")
                     return
                 }
-                self.delegate?.didPerformPOSTRequestSuccessfully!(resultDict, resultStatus: true, url:url)
+                self.delegate?.didPerformPOSTRequestSuccessfully!(resultDict, resultStatus: true, url:url, body:body)
                 print("The result is: " + resultDict.description)
                 
             } catch  {

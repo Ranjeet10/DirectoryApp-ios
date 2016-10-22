@@ -65,7 +65,7 @@ extension UIViewController {
     }
     
     private func addBackButton() {
-        let back:UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "back"),
+        let back:UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "back_white"),
                                                    style: UIBarButtonItemStyle.Plain,
                                                    target: self,
                                                    action: #selector(self.popView))
@@ -166,7 +166,53 @@ extension UIViewController {
         let imageData = UIImageJPEGRepresentation(image, 0.5)
         fileManager.createFileAtPath(paths as String, contents: imageData, attributes: nil)
     }
-
+    
+    func saveDataToDocuments(data: NSDictionary, filename: String) {
+        
+        let fileManager = NSFileManager.defaultManager()
+        let path = (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString).stringByAppendingPathComponent(filename)
+        
+        do {
+            let resultData = try NSJSONSerialization.dataWithJSONObject(data, options: [])
+            fileManager.createFileAtPath(path as String, contents: resultData, attributes: nil)
+        } catch  {
+            print("error trying to convert data to JSON")
+        }
+        
+    }
+    
+    func getDataFromDocuments(filename: String) -> NSDictionary {
+        
+        var resultResponseDict: NSDictionary!
+        do {
+            let fileManager = NSFileManager.defaultManager()
+            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+            let dataPAth = (documentsPath as NSString).stringByAppendingPathComponent(filename)
+            if fileManager.fileExistsAtPath(dataPAth){
+                
+                do {
+                   let data = try NSData(contentsOfFile: dataPAth, options: .UncachedRead)
+                    
+                    guard let resultDict = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? NSDictionary else {
+                        
+                        print("Couldn't convert data to JSON dictionary")
+                        return NSDictionary()
+                    }
+                    resultResponseDict = resultDict
+                    
+                } catch {
+                    print("An error was encountered")
+                    resultResponseDict = nil
+                }
+                
+            }else{
+                resultResponseDict = NSDictionary()
+            }
+            
+        }
+        return resultResponseDict
+        
+    }
     
 }
 

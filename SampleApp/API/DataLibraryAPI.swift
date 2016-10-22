@@ -54,7 +54,7 @@ class DataLibraryAPI: NSObject, HTTPClientDelegate {
     }
     
     
-    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String) {
+    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String, body: String) {
         
         let responseFromServerDict = resultDict as! NSDictionary
         
@@ -62,7 +62,7 @@ class DataLibraryAPI: NSObject, HTTPClientDelegate {
         
         if responseFromServerDict["error"] as! Bool == false {
             
-            self.persistencyManager.saveData(responseFromServerDict, filename: "helloFile")
+            self.persistencyManager.saveData(responseFromServerDict, filename: "level1Data")
             
             NSNotificationCenter.defaultCenter().postNotificationName("GKLevel1Details", object: self, userInfo: ["details":responseFromServerDict])
         }
@@ -73,7 +73,7 @@ class DataLibraryAPI: NSObject, HTTPClientDelegate {
     }
     
     
-    func getLevel1Details(filename: String) {
+  /*  func getLevel1Details(filename: String) {
         
         let level1DetailsArray = persistencyManager.getData("helloFile")!
         NSNotificationCenter.defaultCenter().postNotificationName("GKLevel1Details", object: self, userInfo: ["details":level1DetailsArray])
@@ -89,10 +89,33 @@ class DataLibraryAPI: NSObject, HTTPClientDelegate {
             NSNotificationCenter.defaultCenter().postNotificationName("GKLevel1Details", object: self, userInfo: ["details":level1DetailsArray])
         }
     }
-    
+    */
 //    deinit {
 //        NSNotificationCenter.defaultCenter().removeObserver(self)
 //    }
+    
+    
+    func downloadDataArray() {
+        
+        let dataLabelUnWrapped = self.persistencyManager.getData("level1Data")
+        
+        if dataLabelUnWrapped != nil {
+            NSNotificationCenter.defaultCenter().postNotificationName("GKLevel1Details", object: self, userInfo: ["details":dataLabelUnWrapped!])
+        }
+        
+        if dataLabelUnWrapped == nil {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+              //  let downloadedData = self.httpClient.downloadData("level1Data")
+                
+                self.getLevel1Data()
+                dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                  //  self.dataLabelUnWrapped = downloadedData
+                  //  self.persistencyManager.saveData(downloadedData)
+                  //  NSNotificationCenter.defaultCenter().postNotificationName("GKDetails", object: self, userInfo: ["details":self.dataLabelUnWrapped!])
+                })
+            })
+        }
+    }
     
    
 }

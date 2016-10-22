@@ -73,7 +73,7 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
         checkUserAPIHelper.postRequest(url, body: body)
     }
     
-    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String) {
+    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String, body: String) {
         
         
         let responseFromServerDict = resultDict as! NSDictionary

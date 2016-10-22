@@ -14,6 +14,7 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
     var level1Titile: String?
     var departmentName: String?
     var showInsideLevel1: Bool?
+    var insideLevelDetails: NSDictionary?
     
     @IBOutlet weak var insideLevel1DetailsTable: UITableView!
     
@@ -27,12 +28,19 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
         else{
             self.customizeDetailViewsNavigationBar()
         }
+        self.insideLevel1DetailsTable.estimatedRowHeight = 100
+        self.insideLevel1DetailsTable.rowHeight = UITableViewAutomaticDimension
+
         
       //  LibraryAPI.sharedInstance.downloadInsideData()
       //  NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(populateTable(_:)), name: "GKInsideDetails", object: nil)
 
         
-        self.getInsideLevel1DataHelper(self.departmentName!)
+      //  self.getInsideLevel1DataHelper(self.departmentName!)
+        
+        print(insideLevelDetails)
+        self.insideLevel1Details = insideLevelDetails!["data"] as! NSArray
+        self.insideLevel1DetailsTable.reloadData()
 
     }
     
@@ -96,7 +104,7 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
         
     }
     
-    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String) {
+    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String, body: String) {
         
         
         let responseFromServerDict = resultDict as! NSDictionary
