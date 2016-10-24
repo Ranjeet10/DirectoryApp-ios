@@ -30,7 +30,6 @@ extension UIViewController {
     //MARK: Page navigation
     func customizeHomeNavigationBar() {
         self.addHomeLeftBarButton()
-        self.addTitleView(self.navigationItem)
     }
     
     private func addHomeLeftBarButton() {
@@ -44,15 +43,9 @@ extension UIViewController {
         navigationItem.leftBarButtonItem = leftButton
     }
     
-    func addTitleView(navigationItem:UINavigationItem) {
-       // navigationItem.prompt = "GK"
-    }
-    
-    //MARK: Customizing menu controllers navigation
     
     func customizeNavigationBar() {
         
-        self.addTitleView(self.navigationItem)
         self.addLeftBarButtonItems()
         navigationController!.navigationBar.barTintColor = self.getUIColorFromHexaString("#D71C25")
     }
@@ -60,7 +53,6 @@ extension UIViewController {
     func customizeDetailViewsNavigationBar() {
         
         self.addBackButton()
-        self.addTitleView(self.navigationItem)
         navigationController!.navigationBar.barTintColor = self.getUIColorFromHexaString("#D71C25")
     }
     

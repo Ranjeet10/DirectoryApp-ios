@@ -14,6 +14,15 @@ class GKLeftMenuViewController: UIViewController {
     
     var menuItemsDescription = ["Login if you are Govt Employee", "Know more about app", "Sync Database", "Share with your friends", "Rate app on App Store"]
     
+    let loggedInMenuItems = ["My Profile","Edit Profile", "Sync", "Share", "Rate", "Logout"]
+    let loggedInMenuDescription = ["View your details", "Edit your Profile", "Sync Database", "Share with your friends", "Rate app on App Store", "Logout from your account"]
+    
+    let loggedOutMenuItems = ["Login", "About App", "Sync", "Share", "Rate"]
+    let loggedOutMenuItemsDescription = ["Login if you are Govt Employee", "Know more about app", "Sync Database", "Share with your friends", "Rate app on App Store"]
+
+
+    
+    
     var aboutAppViewController: GKAboutAppViewController?
     
     var loggedIn = false
@@ -21,6 +30,8 @@ class GKLeftMenuViewController: UIViewController {
     var profileDetails: NSDictionary?
     
     var progressVC: GKProgressViewController?
+    
+    var loadedFromLineNumber = false
     
     @IBOutlet weak var menuTopView: UIView!
     
@@ -43,6 +54,8 @@ class GKLeftMenuViewController: UIViewController {
         self.menuTopView.backgroundColor = UIColor.init(patternImage: image.imageWithAlignmentRectInsets(edgeInsets))
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(showPostLoginMenu), name: "LoggedInMenu", object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(showLineNameMenu), name: "lineNameMenu", object: nil)
         
         
         
@@ -67,9 +80,14 @@ class GKLeftMenuViewController: UIViewController {
         let details = userInfo["userDetails"] as! NSDictionary?
         self.profileDetails = details
         
-        self.menuItems = ["My Profile","Edit Profile", "Sync", "Share", "Rate", "Logout"]
-        self.menuItemsDescription = ["View your details", "Edit your Profile", "Sync Database", "Share with your friends", "Rate app on App Store", "Logout from your account"]
+        self.menuItems = self.loggedInMenuItems
+        self.menuItemsDescription = self.loggedInMenuDescription
+        
         self.loggedIn = true
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(true, forKey: "isLoggedIn")
+        
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.username.text = self.profileDetails?.objectForKey("name") as? String
             self.userShortDetails.text = self.profileDetails?.objectForKey("position") as? String
@@ -85,6 +103,23 @@ class GKLeftMenuViewController: UIViewController {
         
     }
     
+    func showLineNameMenu(notification: NSNotification) {
+        
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        let details = userInfo["lineName"] as! [String]?
+        self.menuItems = details!
+        self.menuItemsDescription = []
+        for _ in 1...self.menuItems.count {
+            self.menuItemsDescription.append("")
+        }
+        
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.menuTable.reloadData()
+        }
+        self.loadedFromLineNumber = true
+        
+    }
+    
     
     //MARK: TableView Delegate Methods
     
@@ -93,36 +128,47 @@ class GKLeftMenuViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("LeftMenuItemTableViewCell") as! LeftMenuItemTableViewCell
         cell.menuItemTitleLabel.text = menuItems[indexPath.row]
         cell.menuItemDescription.text = menuItemsDescription[indexPath.row]
         
-        switch indexPath.row {
-        case 0:
-            cell.imageView?.image = UIImage(named: "profile")
-            break
-        case 1:
-            if self.loggedIn {
-                cell.imageView?.image = UIImage(named: "editprofile")
-            }else{
-                cell.imageView?.image = UIImage(named: "about_app")
+        if !loadedFromLineNumber {
+            
+            switch indexPath.row {
+            case 0:
+                cell.imageView?.image = UIImage(named: "profile")
+                break
+            case 1:
+                if self.loggedIn {
+                    cell.imageView?.image = UIImage(named: "editprofile")
+                }else{
+                    cell.imageView?.image = UIImage(named: "about_app")
+                }
+                break
+            case 2:
+                cell.imageView?.image = UIImage(named: "logout")
+                break
+            case 3:
+                cell.imageView?.image = UIImage(named: "share")
+                break
+            case 4:
+                cell.imageView?.image = UIImage(named: "rate")
+                break
+            case 5:
+                cell.imageView?.image = UIImage(named: "logout")
+                break
+            default:
+                break
             }
-            break
-        case 2:
-            cell.imageView?.image = UIImage(named: "logout")
-            break
-        case 3:
-            cell.imageView?.image = UIImage(named: "share")
-            break
-        case 4:
-            cell.imageView?.image = UIImage(named: "rate")
-            break
-        case 5:
-            cell.imageView?.image = UIImage(named: "logout")
-            break
-        default:
-            break
+        }else {
+            switch indexPath.row {
+            case 0:
+                cell.imageView?.image = UIImage(named: "mainLine")
+                break
+            default:
+                cell.imageView?.image = UIImage(named: "disclosureAccessory")
+                break
+            }
         }
         
         
@@ -131,92 +177,120 @@ class GKLeftMenuViewController: UIViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         
-        if indexPath.row == 0 {
+        if !loadedFromLineNumber {
             
+            if indexPath.row == 0 {
+                
+                if self.loggedIn {
+                    
+                    let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                    
+                    let viewMyProfile: GKUserDetailsViewController = storyboard.instantiateViewControllerWithIdentifier("GKUserDetailsViewController") as! GKUserDetailsViewController
+                    
+                    viewMyProfile.profileDetails = self.profileDetails
+                    viewMyProfile.showMyProfile = true
+                    
+                    let navVC = UINavigationController(rootViewController: viewMyProfile)
+                    self.slideMenuController()?.changeMainViewController(navVC, close: true)
+                    
+                    
+                }else {
+                    self.checkDefaultsAndShowRespectivePage()
+                }
+                
+                
+            }
+            
+            
+            if indexPath.row == 1 {
+                
+                if self.loggedIn {
+                    
+                    let editProfileViewController = storyboard.instantiateViewControllerWithIdentifier("GKEditProfileViewController") as! GKEditProfileViewController
+                    editProfileViewController.profileDetails = self.profileDetails
+                    editProfileViewController.showMyProfile = true
+                    
+                    let navVC = UINavigationController(rootViewController: editProfileViewController)
+                    self.slideMenuController()?.changeMainViewController(navVC, close: true)
+                    
+                    
+                }
+                    
+                else {
+                    
+                    
+                    let aboutAppViewController = storyboard.instantiateViewControllerWithIdentifier("GKAboutAppViewController") as! GKAboutAppViewController
+                    
+                    let navVC = UINavigationController(rootViewController: aboutAppViewController)
+                    self.slideMenuController()?.changeMainViewController(navVC, close: true)
+                    
+                }
+                
+                
+            }
+            
+            if indexPath.row == 2 {
+                
+                let appdelegate:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+                appdelegate.setupRootViewController(true)
+                
+            }
+            
+            
+            
+            if indexPath.row == 3 {
+                
+                displayShareSheet("link")
+                
+            }
+            
+            if indexPath.row == 4 {
+                
+                UIApplication.sharedApplication().openURL(NSURL(fileURLWithPath: "https://itunes.com/apps/appname"))
+                
+            }
+            
+            if indexPath.row == 5 {
+                
+                self.menuItems = self.loggedOutMenuItems
+                self.menuItemsDescription = self.loggedOutMenuItemsDescription
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    self.username.text = "Guest"
+                    self.userShortDetails.text = "Login if you are a gov employee"
+                    self.menuTable.reloadData()
+                }
+                self.loggedIn = false
+                let defaults = NSUserDefaults.standardUserDefaults()
+                defaults.setBool(false, forKey: "isLoggedIn")
+
+                let loginViewController = storyboard.instantiateViewControllerWithIdentifier("GKLoginAppViewController") as! GKLoginAppViewController
+                let navVC = UINavigationController(rootViewController: loginViewController)
+                self.slideMenuController()?.changeMainViewController(navVC, close: true)
+                
+            }
+            
+        }
+        else {
+            let notification = NSNotification(name: "ChangeInsideLevelContents", object: nil, userInfo: ["lineName" : self.menuItems[indexPath.row]])
+            NSNotificationCenter.defaultCenter().postNotification(notification)
+            self.closeLeft()
+            
+          /*  self.loadedFromLineNumber = false
             if self.loggedIn {
-                
-                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-                
-                let viewMyProfile: GKUserDetailsViewController = storyboard.instantiateViewControllerWithIdentifier("GKUserDetailsViewController") as! GKUserDetailsViewController
-                
-                viewMyProfile.profileDetails = self.profileDetails
-                viewMyProfile.showMyProfile = true
-                
-                let navVC = UINavigationController(rootViewController: viewMyProfile)
-                self.slideMenuController()?.changeMainViewController(navVC, close: true)
-                
-                
-            }else {
-                self.checkDefaultsAndShowRespectivePage()
+                self.menuItems = self.loggedInMenuItems
+                self.menuItemsDescription = self.loggedInMenuDescription
+            }else{
+                self.menuItems = self.loggedOutMenuItems
+                self.menuItemsDescription = self.loggedOutMenuItemsDescription
             }
-            
-            
-        }
-        
-        
-        if indexPath.row == 1 {
-            
-            if self.loggedIn {
-                
-                let editProfileViewController = storyboard.instantiateViewControllerWithIdentifier("GKEditProfileViewController") as! GKEditProfileViewController
-                editProfileViewController.profileDetails = self.profileDetails
-                editProfileViewController.showMyProfile = true
-                
-                let navVC = UINavigationController(rootViewController: editProfileViewController)
-                self.slideMenuController()?.changeMainViewController(navVC, close: true)
-                
-                
-            }
-                
-            else {
-                
-                
-                let aboutAppViewController = storyboard.instantiateViewControllerWithIdentifier("GKAboutAppViewController") as! GKAboutAppViewController
-                
-                let navVC = UINavigationController(rootViewController: aboutAppViewController)
-                self.slideMenuController()?.changeMainViewController(navVC, close: true)
-                
-            }
-            
-            
-        }
-        
-        if indexPath.row == 2 {
-            
-            let appdelegate:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-            appdelegate.setupRootViewController(true)
-            
-        }
-        
-        
-        
-        if indexPath.row == 3 {
-            
-            displayShareSheet("link")
-            
-        }
-        
-        if indexPath.row == 4 {
-            
-            UIApplication.sharedApplication().openURL(NSURL(fileURLWithPath: "https://itunes.com/apps/appname"))
-            
-        }
-        
-        if indexPath.row == 5 {
-            
-            self.menuItems = ["Login", "About App", "Sync", "Share", "Rate"]
-            self.menuItemsDescription = ["Login if you are Govt Employee", "Know more about app", "Sync Database", "Share with your friends", "Rate app on App Store"]
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                self.username.text = "Guest"
-                self.userShortDetails.text = "Login if you are a gov employee"
                 self.menuTable.reloadData()
             }
-            self.loggedIn = false
-            let loginViewController = storyboard.instantiateViewControllerWithIdentifier("GKLoginAppViewController") as! GKLoginAppViewController
-            let navVC = UINavigationController(rootViewController: loginViewController)
-            self.slideMenuController()?.changeMainViewController(navVC, close: true)
+    */
+
             
         }
         

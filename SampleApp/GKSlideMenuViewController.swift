@@ -387,6 +387,7 @@ public class GKSlideMenuViewController: UIViewController, UIGestureRecognizerDel
         if (close) {
             closeLeft()
         }
+        self.setMainViewController(mainViewController)
     }
     
     
@@ -594,6 +595,10 @@ public class GKSlideMenuViewController: UIViewController, UIGestureRecognizerDel
     
     private func isPointContainedWithinLeftRect(point: CGPoint) -> Bool {
         return CGRectContainsPoint(leftContainerView.frame, point)
+    }
+    
+    private func setMainViewController(mainViewController: UIViewController) {
+        self.mainViewController = mainViewController
     }
     
 }

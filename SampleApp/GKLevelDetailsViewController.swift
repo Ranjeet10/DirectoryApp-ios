@@ -15,49 +15,52 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
     var departmentName: String?
     var showInsideLevel1: Bool?
     var insideLevelDetails: NSDictionary?
+    var lineNameArray = [String]()
+    var newInsideLevelDetailsAsPerLineNumber = NSMutableArray()
+    var titleText: String?
+    var label: UILabel?
     
     @IBOutlet weak var insideLevel1DetailsTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = self.level1Titile
+        
+        
+        self.titleText = self.level1Titile
+        
+        self.label =  UILabel(frame: CGRect(x: 0, y: 0, width: 480, height: 44))
+        self.label!.backgroundColor = UIColor.clearColor()
+        self.label!.numberOfLines = 0
+        self.label!.font = UIFont.boldSystemFontOfSize(15.0)
+        self.label!.textColor = UIColor.whiteColor()
+        self.setNavigationTitle(self.titleText!)
+    
+        self.insideLevel1Details = insideLevelDetails!["data"] as! NSArray
         
         if showInsideLevel1! {
-            self.customizeNavigationBar()
+          //  self.customizeNavigationBar()
+            self.customizeDetailViewsNavigationBar()
+            self.getLineName()
+           // self.showFirstLineOnly()
+          //  NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.createArrayAccorddingToLineNumber(_:)), name: "ChangeInsideLevelContents", object: nil)
         }
         else{
+            
+            self.insideLevel1DetailsTable.reloadData()
             self.customizeDetailViewsNavigationBar()
         }
         self.insideLevel1DetailsTable.estimatedRowHeight = 100
         self.insideLevel1DetailsTable.rowHeight = UITableViewAutomaticDimension
+        
+        
 
         
-      //  LibraryAPI.sharedInstance.downloadInsideData()
-      //  NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(populateTable(_:)), name: "GKInsideDetails", object: nil)
-
-        
-      //  self.getInsideLevel1DataHelper(self.departmentName!)
-        
-        print(insideLevelDetails)
-        self.insideLevel1Details = insideLevelDetails!["data"] as! NSArray
-        self.insideLevel1DetailsTable.reloadData()
-
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func populateTable(notification: NSNotification) {
-        
-        let userInfo = notification.userInfo as! [String: AnyObject]
-        let details = userInfo["InsideDetails"] as! NSDictionary?
-        self.insideLevel1Details = details!["level1"] as! NSArray
-        self.insideLevel1DetailsTable.reloadData()
-        
-    }
-    
     
     //MARK: TableView Delegate Methods
     
@@ -80,9 +83,7 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
         
         self.performSegueWithIdentifier("showUserDetails", sender: self)
         
-        
     }
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showUserDetails" {
@@ -94,86 +95,70 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
         }
     }
     
-    func getInsideLevel1DataHelper(department: String) {
-        
-        let url = "http://directory.karnataka.gov.in/getleveldata.php"
-        let body = "level1=".stringByAppendingString(department)
-        let insideLevel1DataAPIHelper = HTTPClient()
-        insideLevel1DataAPIHelper.delegate = self
-        insideLevel1DataAPIHelper.postRequest(url, body: body)
-        
-    }
-    
-    func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String, body: String) {
-        
-        
-        let responseFromServerDict = resultDict as! NSDictionary
-        
-        print("The result is: " + responseFromServerDict.description)
-        if resultDict["error"] as! Bool == false {
-            self.insideLevel1Details = responseFromServerDict["data"] as! NSArray
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                self.insideLevel1DetailsTable.reloadData()
-            }
-            
-        }
-        
-    }
-    
-    func didFailWithPOSTRequestError(resultStatus: Bool) {
-        print("Error")
-        self.showAlertWithMessage("Somethig went wrong")
-    }
-    
-    
-  /*  func getInsideLevel1Data(department: String) {
-        
-        let myURL = NSURL(string: "http://directory.karnataka.gov.in/getleveldata.php")!
-        let request = NSMutableURLRequest(URL: myURL)
-        request.HTTPMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        let bodyStr:String = "level1=".stringByAppendingString(department)
-        request.HTTPBody = bodyStr.dataUsingEncoding(NSUTF8StringEncoding)
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            
-            // Your completion handler code here
-            
-            
-            guard let responseData = data else {
-                print("Error: did not receive data")
-                return
-            }
-            guard error == nil else {
-                print("error calling GET request")
-                print(error)
-                return
-            }
-            
-            do {
-                guard let resultDict = try NSJSONSerialization.JSONObjectWithData(responseData, options: []) as? NSDictionary else {
-                    
-                    print("Couldn't convert received data to JSON dictionary")
-                    return
+    func getLineName() {
+        if showInsideLevel1! {
+            for individualInsideLevel1Detail in self.insideLevel1Details {
+               let lineName = individualInsideLevel1Detail.objectForKey("lineName") as! String
+                if !self.lineNameArray.contains(lineName) {
+                    self.lineNameArray.append(lineName)
                 }
-                print("The result is: " + resultDict.description)
-                if resultDict["error"] as! Bool == false {
-                    self.insideLevel1Details = resultDict["data"] as! NSArray
-                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                        self.insideLevel1DetailsTable.reloadData()
-                    }
-                    
-                }
-                
-            } catch  {
-                print("error trying to convert data to JSON")
             }
-            
+          //  self.changeLeftMenu()
         }
-        task.resume()
-        
+        print(self.lineNameArray.count)
     }
- */
+    
+    func changeLeftMenu() {
+        
+        let notification = NSNotification(name: "lineNameMenu", object: nil, userInfo: ["lineName" : self.lineNameArray])
+        NSNotificationCenter.defaultCenter().postNotification(notification)
+    }
+    
+    func createArrayAccorddingToLineNumber(notification: NSNotification) {
+        
+        self.newInsideLevelDetailsAsPerLineNumber = NSMutableArray()
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        let lineName = userInfo["lineName"] as! String
+        self.setNavigationTitle(lineName)
+            for individualInsideLevel1Detail in insideLevelDetails!["data"] as! NSArray {
+                let lineNameToCompare = individualInsideLevel1Detail.objectForKey("lineName") as! String
+                if lineName == lineNameToCompare {
+                    self.newInsideLevelDetailsAsPerLineNumber.addObject(individualInsideLevel1Detail)
+                }
+            }
+        self.insideLevel1Details = self.newInsideLevelDetailsAsPerLineNumber
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.insideLevel1DetailsTable.reloadData()
+            self.insideLevel1DetailsTable.scrollsToTop = true
+        }
+    }
+    
+    func setNavigationTitle(titleText: String) {
+        
+        self.label!.text = titleText
+        self.navigationItem.titleView = label
 
+    }
+    
+    func showFirstLineOnly() {
+        
+        self.newInsideLevelDetailsAsPerLineNumber = NSMutableArray()
+        let lineName = self.lineNameArray.first
+        for individualInsideLevel1Detail in self.insideLevel1Details {
+            let lineNameToCompare = individualInsideLevel1Detail.objectForKey("lineName") as! String
+            if lineName == lineNameToCompare {
+                self.newInsideLevelDetailsAsPerLineNumber.addObject(individualInsideLevel1Detail)
+            }
+        }
+        self.insideLevel1Details = self.newInsideLevelDetailsAsPerLineNumber
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.insideLevel1DetailsTable.reloadData()
+        }
+        
+    }
+
+    
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }
