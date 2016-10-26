@@ -9,7 +9,7 @@
 import UIKit
 
 class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTTPClientDelegate {
-        
+    
     var count: Int = 0 {
         willSet(count) {
             print("About to set")
@@ -33,7 +33,6 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
     var departmentName: String?
     var syncDataFlag: Bool?
     var progressVC: GKProgressViewController?
-  //  var count = 0
     var totalCount: Int?
     var progressViewShowing = false
     
@@ -42,7 +41,7 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-    
+        
         self.title = "Directory"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.customizeNavigationBar()
@@ -85,11 +84,9 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         
         if accessoryIndicatorNumber > 1 {
             
-            // cell.accessoryView = self.showCorrectAccesoryView("insideLevelAccessory")
             cell.level1Image.image = UIImage(named: "insideLevelAccessory")
         }
         else {
-            //  cell.accessoryView = self.showCorrectAccesoryView("disclosureAccessory")
             cell.level1Image.image = UIImage(named: "disclosureAccessory")
         }
         
@@ -133,13 +130,9 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
             self.getLevel1DetailsDataHelper("level1=".stringByAppendingString(departmentNumber))
             levelDetailsVC.insideLevelDetails = self.resultantDict
             
-        }
-        
-        if (segue.identifier == "showInsideLevel1Data") {
-            
-            let insidelevel1DetailsVC:GKInsideLevel1DetailsViewController = segue.destinationViewController as! GKInsideLevel1DetailsViewController
-            
-            insidelevel1DetailsVC.insideLevel1Details = self.insideLevel1Details
+            if !showInsideLevel1 {
+                self.getBacKButton()
+            }
             
         }
     }
@@ -153,9 +146,7 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
             
             if dataFromDocument.count == 0 {
                 
-              
-                
-                let url = "http://directory.karnataka.gov.in/getlevel1.php"
+                let url = GKConstants.sharedInstanse.level1API
                 let level1DataAPIHelper = HTTPClient()
                 level1DataAPIHelper.delegate = self
                 level1DataAPIHelper.postRequest(url, body: self.body!)
@@ -173,9 +164,7 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         }
         else {
             
-           
-            
-            let url = "http://directory.karnataka.gov.in/getlevel1.php"
+            let url = GKConstants.sharedInstanse.level1API
             let level1DataAPIHelper = HTTPClient()
             level1DataAPIHelper.delegate = self
             level1DataAPIHelper.postRequest(url, body: self.body!)
@@ -185,7 +174,7 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
     
     func getLevel1DetailsDataHelper(body: String) {
         
-        let url = "http://directory.karnataka.gov.in/getleveldata.php"
+        let url = GKConstants.sharedInstanse.insideLeveldata1API
         
         if !syncDataFlag! {
             
@@ -219,7 +208,6 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         if responseFromServerDict["error"] as! Bool == false {
             
             if !self.mainResponseFinished {
-                
                 
                 self.saveDataToDocuments(responseFromServerDict, filename: body)
                 self.level1Details = resultDict["level1"] as! NSArray
@@ -294,11 +282,10 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         
         dispatch_async(dispatch_get_main_queue()) {
             self.dismissViewControllerAnimated(true, completion: nil)
-
+            
         }
         
     }
-    
     
     func update() {
         
@@ -306,4 +293,7 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
         NSNotificationCenter.defaultCenter().postNotification(notification)
         
     }
+    
+    @IBAction func unwindToMainScreen(segue: UIStoryboardSegue) {}
+    
 }

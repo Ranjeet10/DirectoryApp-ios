@@ -17,11 +17,12 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
     var userName: String?
     var userPosition: String?
     var userPhoneNumber: String?
+    var departmentName = ""
     var uploadPhotoRequest = false
     
     var imagePicker = UIImagePickerController()
-    @IBOutlet weak var profileImageView: UIImageView!
     
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var enterPasswordText: UITextField!
     @IBOutlet weak var confirmPasswordText: UITextField!
     @IBOutlet weak var userNameLabel: UILabel!
@@ -29,7 +30,7 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.customizeDetailViewsNavigationBar()
         self.title = "Edit Profile"
@@ -50,29 +51,22 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
         self.profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         self.profileImageView.clipsToBounds = true
         self.profileImageView.image = imageFetched
+        
+        if let val = GKUserDefaults.getValueFromDefaultsForKey(kDepartmentName) as? String {
+            self.departmentName = val
+        }
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     @IBAction func updatePassword(sender: AnyObject) {
         
         if self.enterPasswordText.text == self.confirmPasswordText.text {
             self.newPassword = self.enterPasswordText.text
-            //  self.updatePassword()
             self.updatePasswordHelper()
         }else {
             self.newPassword = ""
@@ -84,7 +78,7 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
     func updatePasswordHelper() {
         
         let url = GKConstants.sharedInstanse.updatePasswordAPI
-        let body = "mobile=".stringByAppendingString(self.userPhoneNumber!).stringByAppendingString("&tableID=department2&password=").stringByAppendingString(self.newPassword!)
+        let body = "mobile=".stringByAppendingString(self.userPhoneNumber!).stringByAppendingString("&tableID=").stringByAppendingString(self.departmentName).stringByAppendingString("&password=").stringByAppendingString(self.newPassword!)
         let updatePasswordAPIHelper = HTTPClient()
         updatePasswordAPIHelper.delegate = self
         updatePasswordAPIHelper.postRequest(url, body: body)
@@ -108,10 +102,8 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
                 print(self.receivedData!.objectForKey("name"))
                 print(self.receivedData!.objectForKey("email"))
                 self.showLoggedInHomePage()
-
+                
             }
-            
-            
         }
         self.uploadPhotoRequest = false
         
@@ -211,11 +203,11 @@ class GKEditProfileViewController: UIViewController, HTTPClientDelegate,UIImageP
     func uploadPhotoToServer(imageRepresentationInBase64: String) {
         
         let url = GKConstants.sharedInstanse.uploadPhotoAPI
-        let body = "mobile=8105991000&tableID=department2&image=".stringByAppendingString(imageRepresentationInBase64)
+        let body = "mobile=".stringByAppendingString(self.userPhoneNumber!).stringByAppendingString("&tableID=").stringByAppendingString(self.departmentName).stringByAppendingString("&image=").stringByAppendingString(imageRepresentationInBase64)
         let uploadPhotoAPIHelper = HTTPClient()
         uploadPhotoAPIHelper.delegate = self
         uploadPhotoAPIHelper.postRequest(url, body: body)
-                    
+        
     }
-
+    
 }

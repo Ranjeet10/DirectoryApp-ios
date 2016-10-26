@@ -14,9 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var mainController:GKMainViewController?
-    var leftviewController:GKLeftMenuViewController?
+    var leftviewController:UIViewController?
     var slideMenuController:GKSlideMenuViewController?
     var level1Details: NSDictionary?
+    var isLoggedIn: Bool?
     
     override init() {
         super.init()
@@ -33,12 +34,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let initialViewController = UIViewController()
         self.window!.rootViewController = initialViewController
         self.window!.makeKeyAndVisible()
-        self.setupRootViewController(false)
+        
         
         
         if self.isConnectedToNetwork() == false {
             self.showAlertWithMessage("No Internet connection")
         }
+        
+        self.setupRootViewController(false)
         
         return true
     }
@@ -64,18 +67,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
     
     
     
     func setupRootViewController(syncData: Bool) {
         
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let loggedIn = GKUserDefaults.getValueFromDefaultsForKey(kLoggedIn) as? Bool
         
-        self.mainController = storyboard.instantiateViewControllerWithIdentifier("GKMainViewController") as? GKMainViewController
+        if let val = loggedIn {
+            if val {
+                self.isLoggedIn = true
+            }else {
+                self.isLoggedIn = false
+            }
+        }else {
+            self.isLoggedIn = false
+            GKUserDefaults.setBoolInDefaults(false, forKey: kLoggedIn)
+        }
+        
+        self.mainController = GKConstants.sharedInstanse.storyboard.instantiateViewControllerWithIdentifier("GKMainViewController") as? GKMainViewController
         self.mainController?.syncDataFlag = syncData
         
-        self.leftviewController = storyboard.instantiateViewControllerWithIdentifier("GKLeftMenuViewController") as? GKLeftMenuViewController
+        if isLoggedIn! {
+            self.leftviewController = GKConstants.sharedInstanse.dynamicMenuStoryBoard.instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as? GKLoggedInMenuViewController
+        }else{
+            self.leftviewController = GKConstants.sharedInstanse.storyboard.instantiateViewControllerWithIdentifier("GKLeftMenuViewController") as? GKLeftMenuViewController
+            
+        }
         
         // Creating nav controller with Hamburger back button
         let navVC = UINavigationController(rootViewController: self.mainController!)

@@ -17,6 +17,8 @@ class GKConstants: NSObject {
     let loginUserAPI = "http://directory.karnataka.gov.in/checkpassword.php"
     let updatePasswordAPI = "http://directory.karnataka.gov.in/updatepswrd.php"
     let uploadPhotoAPI = "http://directory.karnataka.gov.in/upload.php"
+    let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+    let dynamicMenuStoryBoard = UIStoryboard.init(name: "dynamicMenu", bundle: nil)
     
     
     /* ============== Singleton =============== */

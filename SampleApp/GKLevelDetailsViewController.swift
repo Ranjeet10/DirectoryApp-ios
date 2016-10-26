@@ -38,22 +38,18 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
         self.insideLevel1Details = insideLevelDetails!["data"] as! NSArray
         
         if showInsideLevel1! {
-          //  self.customizeNavigationBar()
-            self.customizeDetailViewsNavigationBar()
+            self.customizeNavigationBar()
             self.getLineName()
-           // self.showFirstLineOnly()
-          //  NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.createArrayAccorddingToLineNumber(_:)), name: "ChangeInsideLevelContents", object: nil)
+            self.showFirstLineOnly()
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.createArrayAccorddingToLineNumber(_:)), name: "ChangeInsideLevelContents", object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.performUnwindToMain), name: "PerformSegue", object: nil)
+            
         }
         else{
-            
             self.insideLevel1DetailsTable.reloadData()
-            self.customizeDetailViewsNavigationBar()
         }
         self.insideLevel1DetailsTable.estimatedRowHeight = 100
         self.insideLevel1DetailsTable.rowHeight = UITableViewAutomaticDimension
-        
-        
-
         
     }
     
@@ -92,7 +88,9 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
             userDetailsVC.insideLevel1Details = self.insideLevel1Details
             userDetailsVC.selectedIndex = self.insideLevel1DetailsTable.indexPathForSelectedRow?.row
             userDetailsVC.showMyProfile = false
+            self.getBacKButton()
         }
+        
     }
     
     func getLineName() {
@@ -103,15 +101,18 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
                     self.lineNameArray.append(lineName)
                 }
             }
-          //  self.changeLeftMenu()
+            self.changeLeftMenu()
         }
         print(self.lineNameArray.count)
     }
     
     func changeLeftMenu() {
         
-        let notification = NSNotification(name: "lineNameMenu", object: nil, userInfo: ["lineName" : self.lineNameArray])
-        NSNotificationCenter.defaultCenter().postNotification(notification)
+        let insideLevel1DetailsMenuController = GKConstants.sharedInstanse.dynamicMenuStoryBoard.instantiateViewControllerWithIdentifier("GKInsideLeve1DetailsMenuViewController") as! GKInsideLeve1DetailsMenuViewController
+        insideLevel1DetailsMenuController.menuItems = self.lineNameArray
+        
+        self.slideMenuController()?.changeLeftViewController(insideLevel1DetailsMenuController, closeLeft: true)
+        
     }
     
     func createArrayAccorddingToLineNumber(notification: NSNotification) {
@@ -155,6 +156,52 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
             self.insideLevel1DetailsTable.reloadData()
         }
         
+    }
+    
+    @IBAction func showRespectiveMenuOnNavingatingOutOfInsideLevelDetails() {
+        
+        if let loggedIn = GKUserDefaults.getValueFromDefaultsForKey(kLoggedIn) as? Bool{
+            
+            if loggedIn {
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    self.popView()
+                    let loggedInMenuController = UIStoryboard(name: "dynamicMenu", bundle: nil).instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as! GKLoggedInMenuViewController
+                    
+                    self.slideMenuController()?.changeLeftViewController(loggedInMenuController, closeLeft: true)
+                }
+            }else {
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    self.popView()
+                    let loggedOutMenuController = GKConstants.sharedInstanse.storyboard.instantiateViewControllerWithIdentifier("GKLeftMenuViewController") as! GKLeftMenuViewController
+                    self.slideMenuController()?.changeLeftViewController(loggedOutMenuController, closeLeft: true)
+                }
+            }
+            
+           
+        }
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
+    @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
+    
+    func performUnwindToMain() {
+                
+        let loggedIn = GKUserDefaults.getBoolFromDefaultsForKey(kLoggedIn)
+        
+        if loggedIn {
+            let dynamicStoryBoard = UIStoryboard(name: "dynamicMenu", bundle: nil)
+            let newLeftMenuController = dynamicStoryBoard.instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as! GKLoggedInMenuViewController
+            self.slideMenuController()?.changeLeftViewController(newLeftMenuController, closeLeft: true)
+
+        }else{
+           
+            let dynamicStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+            let newLeftMenuController = dynamicStoryBoard.instantiateViewControllerWithIdentifier("GKLeftMenuViewController") as! GKLeftMenuViewController
+            self.slideMenuController()?.changeLeftViewController(newLeftMenuController, closeLeft: true)
+
+        }
+        self.performSegueWithIdentifier("goBackToMain", sender: self)
+
     }
 
     

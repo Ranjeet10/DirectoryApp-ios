@@ -8,24 +8,12 @@
 
 import UIKit
 
-@objc protocol GKProgressViewControllerDelegate:NSObjectProtocol {
-    
-    optional func didTapOnSMSAlertCancel(customAlertIdentifier:Int)
-    optional func didTapOnSMSAlertTargetButton(customAlertIdentifier:Int)
-    optional func didTapOnSMSOkButton(countryCode:String, phoneNumber: String)
-    optional func didTapOnSMSCancelButton()
-    
-    
-}
-
 class GKProgressViewController: UIViewController {
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var currentProgress: UILabel!
     @IBOutlet weak var currentProgressRatio: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
-    
-   // var delegate:GKProgressViewControllerDelegate?
     var currentProgressCount: Int?
     var totalCount: Int?
     

@@ -19,43 +19,26 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
     var tableID: String = ""
     var level1: String = ""
     var receivedData: NSDictionary?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         self.title = "Login"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.getNumberFromUserDefaults()
-        
-        //self.phoneNumberLabel.text = phoneNumber
-        
-       // self.checkUser("")
         self.checkUserHelper()
-        
-      //  self.loginUser("")
         self.customizeDetailViewsNavigationBar()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     @IBAction func loginAction(sender: AnyObject){
-        self.loginUser("")
+        self.loginUser()
     }
     
     @IBAction func forgotPasswordAction(sender: AnyObject){
@@ -74,7 +57,6 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
     }
     
     func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String, body: String) {
-        
         
         let responseFromServerDict = resultDict as! NSDictionary
         
@@ -99,9 +81,9 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
         print("Error")
         self.showAlertWithMessage("Somethig went wrong")
     }
-
-
-    func loginUser(phoneNumber: String) {
+    
+    
+    func loginUser() {
         
         let myURL = NSURL(string: "http://directory.karnataka.gov.in/checkpassword.php")!
         let request = NSMutableURLRequest(URL: myURL)
@@ -111,7 +93,6 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
         
         let bodyStr = "mobile=".stringByAppendingString(self.phoneNumber!).stringByAppendingString("&tableID=").stringByAppendingString(self.tableID).stringByAppendingString("&password=").stringByAppendingString(enterPasswordText.text!)
         
-//        let bodyStr = "mobile=8105991000&tableID=department2&password=".stringByAppendingString(self.enterPasswordText.text!)
         request.HTTPBody = bodyStr.dataUsingEncoding(NSUTF8StringEncoding)
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             data, response, error in
@@ -135,19 +116,19 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
                 print("The result is: " + resultDict.description)
                 if resultDict["error"] as! Bool == false {
                     
-                     self.receivedData = resultDict.objectForKey("user") as? NSDictionary
+                    self.receivedData = resultDict.objectForKey("user") as? NSDictionary
                     
                     print(self.receivedData! .objectForKey("name"))
                     
                     self.showLoggedInHomePage()
-
+                    
                 }
                 else {
                     
                     dispatch_async(dispatch_get_main_queue()) { () -> Void in
                         self.showAlertWithMessage("Password is incorrect")
                     }
-
+                    
                     
                 }
                 
@@ -156,34 +137,35 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
             }
             
         }
-        task.resume()        
+        task.resume()
         
     }
     
     func showLoggedInHomePage() {
         
-        let notification = NSNotification.init(name: "LoggedInMenu", object: self, userInfo: ["userDetails": self.receivedData!])
+        GKUserDefaults.setBoolInDefaults(true, forKey: kLoggedIn)
+        NSUserDefaults.standardUserDefaults().synchronize()
         
-        NSNotificationCenter.defaultCenter().postNotification(notification)
-            
+        
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.popView()
+            let loggedInMenuController = UIStoryboard(name: "dynamicMenu", bundle: nil).instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as! GKLoggedInMenuViewController
+            loggedInMenuController.profileDetails = self.receivedData
+            
+            self.slideMenuController()?.changeLeftViewController(loggedInMenuController, closeLeft: true)
         }
         
     }
     
     func getNumberFromUserDefaults() {
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
-        if let phoneNumber = defaults.valueForKey("PhoneNumber") as? String {
-            
+        if let phoneNumber = GKUserDefaults.getValueFromDefaultsForKey(kPhoneNumber) as? String {
             self.phoneNumber = phoneNumber
             self.phoneNumberLabel.text = self.phoneNumber
-            
         }
+        
     }
     
     
-
+    
 }

@@ -109,6 +109,22 @@ extension UIViewController {
         slideMenuController()?.closeLeft()
     }
     
+    func getLoggedInMenu() {
+        
+    }
+    
+    func getLoggedOutMenu() {
+        
+    }
+    
+    
+    func getBacKButton() {
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        backItem.setBackButtonBackgroundImage(UIImage(named: "back_white"), forState: .Normal, barMetrics: .Default)
+        navigationItem.backBarButtonItem = backItem
+    }
+    
     func getUIColorFromHexaString(hexString: String) -> UIColor {
         let r, g, b, a: CGFloat
         
@@ -145,7 +161,7 @@ extension UIViewController {
             if fileManager.fileExistsAtPath(imagePAth){
                 imageFetched = UIImage(contentsOfFile: imagePAth)
             }else{
-                imageFetched = UIImage()
+                imageFetched = UIImage(named: "profile")
             }
             
         }

@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		5D30B2A01DA64F550049C0B0 /* GKCommonUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30B29F1DA64F550049C0B0 /* GKCommonUtilities.swift */; };
 		5D30B2A21DA6533B0049C0B0 /* GKLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30B2A11DA6533B0049C0B0 /* GKLoginViewController.swift */; };
-		5D30B2A41DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30B2A31DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift */; };
 		5D30B2AA1DA675000049C0B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D30B2A81DA675000049C0B0 /* Main.storyboard */; };
 		5D30B2AC1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30B2AB1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift */; };
 		5D4105CB1DAB96B6003E82C2 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4105C81DAB96B6003E82C2 /* HTTPClient.swift */; };
 		5D4703471DB1015A00C41DB2 /* GKLoginAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */; };
 		5D4703491DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */; };
+		5D658CED1DC10D4200BCF88F /* GKUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D658CEC1DC10D4200BCF88F /* GKUserDefaults.swift */; };
 		5D68D0991DB949C000B20D98 /* GKProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D68D0951DB949C000B20D98 /* GKProgressViewController.xib */; };
 		5D68D09A1DB949C000B20D98 /* GKProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D68D0961DB949C000B20D98 /* GKProgressViewController.swift */; };
 		5D79A6AA1DA5804900F1BBB6 /* Level1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A6A91DA5804900F1BBB6 /* Level1TableViewCell.swift */; };
@@ -28,8 +28,9 @@
 		5DB880D91DAFB484001B2D42 /* GKSlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB880D81DAFB484001B2D42 /* GKSlideMenuViewController.swift */; };
 		5DB880DB1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB880DA1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift */; };
 		5DB880DD1DAFB519001B2D42 /* UserDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB880DC1DAFB519001B2D42 /* UserDetailsTableViewCell.swift */; };
-		5DBDA8541DB7412600233675 /* DataLibraryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBDA8531DB7412600233675 /* DataLibraryAPI.swift */; };
-		5DE530F51DB784DD00B6716C /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE530F41DB784DD00B6716C /* PersistencyManager.swift */; };
+		5DE321111DBF173200EF5C57 /* dynamicMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DE321101DBF173200EF5C57 /* dynamicMenu.storyboard */; };
+		5DE321141DBF17CC00EF5C57 /* GKLoggedInMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE321131DBF17CC00EF5C57 /* GKLoggedInMenuViewController.swift */; };
+		5DE321161DBF18EE00EF5C57 /* GKInsideLeve1DetailsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE321151DBF18EE00EF5C57 /* GKInsideLeve1DetailsMenuViewController.swift */; };
 		5DE6DD6C1DA4E67A00DC4E10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE6DD6B1DA4E67A00DC4E10 /* AppDelegate.swift */; };
 		5DE6DD731DA4E67A00DC4E10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DE6DD721DA4E67A00DC4E10 /* Assets.xcassets */; };
 		5DE6DD761DA4E67A00DC4E10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DE6DD741DA4E67A00DC4E10 /* LaunchScreen.storyboard */; };
@@ -39,12 +40,12 @@
 /* Begin PBXFileReference section */
 		5D30B29F1DA64F550049C0B0 /* GKCommonUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GKCommonUtilities.swift; path = ../GKCommonUtilities.swift; sourceTree = "<group>"; };
 		5D30B2A11DA6533B0049C0B0 /* GKLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKLoginViewController.swift; sourceTree = "<group>"; };
-		5D30B2A31DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKInsideLevel1DetailsViewController.swift; sourceTree = "<group>"; };
 		5D30B2A91DA675000049C0B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5D30B2AB1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsideLevel1TableViewCell.swift; sourceTree = "<group>"; };
 		5D4105C81DAB96B6003E82C2 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		5D4703461DB1015A00C41DB2 /* GKLoginAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKLoginAppViewController.swift; sourceTree = "<group>"; };
 		5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKUpdatePasswordViewController.swift; sourceTree = "<group>"; };
+		5D658CEC1DC10D4200BCF88F /* GKUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKUserDefaults.swift; sourceTree = "<group>"; };
 		5D68D0951DB949C000B20D98 /* GKProgressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKProgressViewController.xib; sourceTree = "<group>"; };
 		5D68D0961DB949C000B20D98 /* GKProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKProgressViewController.swift; sourceTree = "<group>"; };
 		5D79A6A91DA5804900F1BBB6 /* Level1TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level1TableViewCell.swift; sourceTree = "<group>"; };
@@ -58,8 +59,9 @@
 		5DB880D81DAFB484001B2D42 /* GKSlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKSlideMenuViewController.swift; sourceTree = "<group>"; };
 		5DB880DA1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKLeftMenuViewController.swift; sourceTree = "<group>"; };
 		5DB880DC1DAFB519001B2D42 /* UserDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsTableViewCell.swift; sourceTree = "<group>"; };
-		5DBDA8531DB7412600233675 /* DataLibraryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLibraryAPI.swift; sourceTree = "<group>"; };
-		5DE530F41DB784DD00B6716C /* PersistencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
+		5DE321101DBF173200EF5C57 /* dynamicMenu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = dynamicMenu.storyboard; sourceTree = "<group>"; };
+		5DE321131DBF17CC00EF5C57 /* GKLoggedInMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKLoggedInMenuViewController.swift; sourceTree = "<group>"; };
+		5DE321151DBF18EE00EF5C57 /* GKInsideLeve1DetailsMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GKInsideLeve1DetailsMenuViewController.swift; sourceTree = "<group>"; };
 		5DE6DD681DA4E67900DC4E10 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE6DD6B1DA4E67A00DC4E10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DE6DD721DA4E67A00DC4E10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,8 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				5D4105C81DAB96B6003E82C2 /* HTTPClient.swift */,
-				5DBDA8531DB7412600233675 /* DataLibraryAPI.swift */,
-				5DE530F41DB784DD00B6716C /* PersistencyManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -105,6 +105,23 @@
 				5D30B29F1DA64F550049C0B0 /* GKCommonUtilities.swift */,
 			);
 			path = Commons;
+			sourceTree = "<group>";
+		};
+		5DE3210F1DBF171100EF5C57 /* Menu Views */ = {
+			isa = PBXGroup;
+			children = (
+				5DE321101DBF173200EF5C57 /* dynamicMenu.storyboard */,
+			);
+			path = "Menu Views";
+			sourceTree = "<group>";
+		};
+		5DE321121DBF177E00EF5C57 /* Menu Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5DE321131DBF17CC00EF5C57 /* GKLoggedInMenuViewController.swift */,
+				5DE321151DBF18EE00EF5C57 /* GKInsideLeve1DetailsMenuViewController.swift */,
+			);
+			path = "Menu Controllers";
 			sourceTree = "<group>";
 		};
 		5DE6DD5F1DA4E67900DC4E10 = {
@@ -126,9 +143,12 @@
 		5DE6DD6A1DA4E67A00DC4E10 /* SampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				5DE321121DBF177E00EF5C57 /* Menu Controllers */,
+				5DE3210F1DBF171100EF5C57 /* Menu Views */,
 				5D79A6A31DA56B9800F1BBB6 /* API */,
 				5DE6DD6B1DA4E67A00DC4E10 /* AppDelegate.swift */,
 				5D30B2A11DA6533B0049C0B0 /* GKLoginViewController.swift */,
+				5D658CEC1DC10D4200BCF88F /* GKUserDefaults.swift */,
 				5D9EA5CD1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift */,
 				5D4703481DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift */,
 				5D9EA5E01DB20E0C00CE96FC /* Commons */,
@@ -141,7 +161,6 @@
 				5DE6DD7D1DA4E8C900DC4E10 /* GKMainViewController.swift */,
 				5D8A7F5C1DB3D2D700C557C1 /* GKEditProfileViewController.swift */,
 				5D7CCEF31DA5378000853E20 /* GKAboutAppViewController.swift */,
-				5D30B2A31DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift */,
 				5DB880DC1DAFB519001B2D42 /* UserDetailsTableViewCell.swift */,
 				5DA4C0211DA6D01C008FFEF2 /* GKUserDetailsViewController.swift */,
 				5D30B2AB1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift */,
@@ -186,6 +205,7 @@
 				TargetAttributes = {
 					5DE6DD671DA4E67900DC4E10 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = ZF32WRGZBB;
 					};
 				};
 			};
@@ -216,6 +236,7 @@
 				5DE6DD761DA4E67A00DC4E10 /* LaunchScreen.storyboard in Resources */,
 				5DE6DD731DA4E67A00DC4E10 /* Assets.xcassets in Resources */,
 				5D68D0991DB949C000B20D98 /* GKProgressViewController.xib in Resources */,
+				5DE321111DBF173200EF5C57 /* dynamicMenu.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,23 +249,23 @@
 			files = (
 				5D30B2AC1DA67B770049C0B0 /* InsideLevel1TableViewCell.swift in Sources */,
 				5D79A6AA1DA5804900F1BBB6 /* Level1TableViewCell.swift in Sources */,
+				5D658CED1DC10D4200BCF88F /* GKUserDefaults.swift in Sources */,
 				5D79A6AC1DA5870400F1BBB6 /* GKLevelDetailsViewController.swift in Sources */,
 				5DB880DD1DAFB519001B2D42 /* UserDetailsTableViewCell.swift in Sources */,
 				5D30B2A21DA6533B0049C0B0 /* GKLoginViewController.swift in Sources */,
 				5D9EA5CE1DB1F1AC00CE96FC /* GKVerifyCodeViewController.swift in Sources */,
-				5D30B2A41DA6548B0049C0B0 /* GKInsideLevel1DetailsViewController.swift in Sources */,
 				5DB880D91DAFB484001B2D42 /* GKSlideMenuViewController.swift in Sources */,
 				5D8A7F5D1DB3D2D700C557C1 /* GKEditProfileViewController.swift in Sources */,
-				5DE530F51DB784DD00B6716C /* PersistencyManager.swift in Sources */,
 				5D30B2A01DA64F550049C0B0 /* GKCommonUtilities.swift in Sources */,
 				5D9EA5CC1DB1E6B800CE96FC /* GKConstants.swift in Sources */,
+				5DE321141DBF17CC00EF5C57 /* GKLoggedInMenuViewController.swift in Sources */,
 				5D68D09A1DB949C000B20D98 /* GKProgressViewController.swift in Sources */,
 				5DB880DB1DAFB4CA001B2D42 /* GKLeftMenuViewController.swift in Sources */,
 				5D4703471DB1015A00C41DB2 /* GKLoginAppViewController.swift in Sources */,
-				5DBDA8541DB7412600233675 /* DataLibraryAPI.swift in Sources */,
 				5D7CCEF41DA5378000853E20 /* GKAboutAppViewController.swift in Sources */,
 				5DA4C0221DA6D01C008FFEF2 /* GKUserDetailsViewController.swift in Sources */,
 				5DE6DD7E1DA4E8C900DC4E10 /* GKMainViewController.swift in Sources */,
+				5DE321161DBF18EE00EF5C57 /* GKInsideLeve1DetailsMenuViewController.swift in Sources */,
 				5D7CCEF11DA5360800853E20 /* LeftMenuItemTableViewCell.swift in Sources */,
 				5D4105CB1DAB96B6003E82C2 /* HTTPClient.swift in Sources */,
 				5D4703491DB14D9300C41DB2 /* GKUpdatePasswordViewController.swift in Sources */,
@@ -369,11 +390,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Ranjeet.SampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -383,10 +406,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Ranjeet.SampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -9,7 +9,7 @@
 import UIKit
 
 class GKUpdatePasswordViewController: UIViewController,HTTPClientDelegate {
-
+    
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var enterPasswordText: UITextField!
     @IBOutlet weak var confirmPasswordText: UITextField!
@@ -23,35 +23,23 @@ class GKUpdatePasswordViewController: UIViewController,HTTPClientDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.title = "Forgot Password"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         self.phoneNumberLabel.text = self.userPhoneNumber
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     @IBAction func updatePasswordAction(sender: AnyObject) {
-     
+        
         if self.enterPasswordText.text == self.confirmPasswordText.text {
             self.newPassword = self.enterPasswordText.text
-          //  self.updatePassword()
             self.updatePasswordHelper()
         }else {
             self.newPassword = ""
@@ -71,7 +59,6 @@ class GKUpdatePasswordViewController: UIViewController,HTTPClientDelegate {
     }
     
     func didPerformPOSTRequestSuccessfully(resultDict: AnyObject, resultStatus: Bool, url: String, body: String) {
-        
         
         let responseFromServerDict = resultDict as! NSDictionary
         
@@ -95,19 +82,24 @@ class GKUpdatePasswordViewController: UIViewController,HTTPClientDelegate {
     
     func showLoggedInHomePage() {
         
-        let notification = NSNotification.init(name: "LoggedInMenu", object: self, userInfo: ["userDetails": self.receivedData!])
-        NSNotificationCenter.defaultCenter().postNotification(notification)
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setBool(true, forKey: "hasLoggedInSecond")
-        defaults.setObject(self.userPhoneNumber, forKey: "PhoneNumber")
+        GKUserDefaults.setValueInDefaults(self.receivedData, forKey: kUserInfo)
+        GKUserDefaults.setBoolInDefaults(true, forKey: kSecondLogIn)
+        GKUserDefaults.setBoolInDefaults(true, forKey: kLoggedIn)
+        GKUserDefaults.setValueInDefaults(self.userPhoneNumber, forKey: kPhoneNumber)
+        GKUserDefaults.setValueInDefaults(self.departamentName, forKey: kDepartmentName)
+        NSUserDefaults.standardUserDefaults().synchronize()
         
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.popView()
+            
+            let loggedInMenuController = UIStoryboard(name: "dynamicMenu", bundle: nil).instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as! GKLoggedInMenuViewController
+            
+            self.slideMenuController()?.changeLeftViewController(loggedInMenuController, closeLeft: true)
+            
         }
         
         
     }
-
-
+    
+    
 }
