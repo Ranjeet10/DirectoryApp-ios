@@ -112,22 +112,23 @@ class GKLeftMenuViewController: UIViewController {
     
     func checkDefaultsAndShowRespectivePage() {
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
-        if !defaults.boolForKey("hasLoggedInSecond") {
-            defaults.setBool(false, forKey: "hasLoggedInSecond")
+        if let val = GKUserDefaults.getValueFromDefaultsForKey(kSecondLogIn) as? Bool {
+            if !val {
+                GKUserDefaults.setBoolInDefaults(false, forKey: kSecondLogIn)
+                NSUserDefaults.standardUserDefaults().synchronize()
+            }
         }
         
-        if defaults.boolForKey("hasLoggedInSecond") {
+        if GKUserDefaults.getBoolFromDefaultsForKey(kSecondLogIn) {
             
-            let loginAppViewController = storyboard!.instantiateViewControllerWithIdentifier("GKLoginAppViewController") as! GKLoginAppViewController
+            let loginAppViewController = GKConstants.sharedInstanse.storyboard.instantiateViewControllerWithIdentifier("GKLoginAppViewController") as! GKLoginAppViewController
             
             let navVC = UINavigationController(rootViewController: loginAppViewController)
             self.slideMenuController()?.changeMainViewController(navVC, close: true)
         }
         else {
             
-            let loginViewController = storyboard!.instantiateViewControllerWithIdentifier("GKLoginViewController") as! GKLoginViewController
+            let loginViewController = GKConstants.sharedInstanse.storyboard.instantiateViewControllerWithIdentifier("GKLoginViewController") as! GKLoginViewController
             
             let navVC = UINavigationController(rootViewController: loginViewController)
             self.slideMenuController()?.changeMainViewController(navVC, close: true)

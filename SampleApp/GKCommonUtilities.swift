@@ -81,8 +81,8 @@ extension UIViewController {
     
     func popView() {
         //self.navigationController?.popViewControllerAnimated(true)
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("GKMainViewController") as! GKMainViewController
+
+        let mainViewController = GKConstants.sharedInstanse.storyboard.instantiateViewControllerWithIdentifier("GKMainViewController") as! GKMainViewController
         
         let navVC = UINavigationController(rootViewController: mainViewController)
         self.slideMenuController()?.changeMainViewController(navVC, close: true)
@@ -220,6 +220,19 @@ extension UIViewController {
         }
         return resultResponseDict
         
+    }
+    
+    func showLoggedInMenu() {
+        
+        let loggedInMenuController = GKConstants.sharedInstanse.dynamicMenuStoryBoard.instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as! GKLoggedInMenuViewController
+        
+        self.slideMenuController()?.changeLeftViewController(loggedInMenuController, closeLeft: true)
+    }
+    
+    func showLoggedOutMenu() {
+        
+        let loggedOutMenuController = GKConstants.sharedInstanse.storyboard.instantiateViewControllerWithIdentifier("GKLeftMenuViewController") as! GKLeftMenuViewController
+        self.slideMenuController()?.changeLeftViewController(loggedOutMenuController, closeLeft: true)
     }
     
 }

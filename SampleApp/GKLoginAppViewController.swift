@@ -129,7 +129,6 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
                         self.showAlertWithMessage("Password is incorrect")
                     }
                     
-                    
                 }
                 
             } catch  {
@@ -146,10 +145,9 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
         GKUserDefaults.setBoolInDefaults(true, forKey: kLoggedIn)
         NSUserDefaults.standardUserDefaults().synchronize()
         
-        
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.popView()
-            let loggedInMenuController = UIStoryboard(name: "dynamicMenu", bundle: nil).instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as! GKLoggedInMenuViewController
+            let loggedInMenuController = GKConstants.sharedInstanse.dynamicMenuStoryBoard.instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as! GKLoggedInMenuViewController
             loggedInMenuController.profileDetails = self.receivedData
             
             self.slideMenuController()?.changeLeftViewController(loggedInMenuController, closeLeft: true)
@@ -165,7 +163,4 @@ class GKLoginAppViewController: UIViewController,HTTPClientDelegate {
         }
         
     }
-    
-    
-    
 }

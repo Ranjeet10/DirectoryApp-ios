@@ -231,7 +231,6 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
             }
             
         }
-        print("\n RK", count)
         if count == self.totalCount {
             self.removeProgressBar()
         }
@@ -289,7 +288,7 @@ class GKMainViewController: UIViewController, GKSlideMenuControllerDelegate, HTT
     
     func update() {
         
-        let notification =  NSNotification(name: "countNotification", object: nil, userInfo: ["count" : self.count])
+        let notification =  NSNotification(name: GKConstants.sharedInstanse.kCountNotification, object: nil, userInfo: ["count" : self.count])
         NSNotificationCenter.defaultCenter().postNotification(notification)
         
     }

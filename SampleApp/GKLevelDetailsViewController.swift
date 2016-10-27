@@ -41,8 +41,10 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
             self.customizeNavigationBar()
             self.getLineName()
             self.showFirstLineOnly()
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.createArrayAccorddingToLineNumber(_:)), name: "ChangeInsideLevelContents", object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.performUnwindToMain), name: "PerformSegue", object: nil)
+           
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.createArrayAccorddingToLineNumber(_:)), name: GKConstants.sharedInstanse.kChangeInsideLevelContents, object: nil)
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.performUnwindToMain), name: GKConstants.sharedInstanse.kShowMainPageNotification, object: nil)
             
         }
         else{
@@ -165,15 +167,12 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
             if loggedIn {
                 dispatch_async(dispatch_get_main_queue()) { () -> Void in
                     self.popView()
-                    let loggedInMenuController = UIStoryboard(name: "dynamicMenu", bundle: nil).instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as! GKLoggedInMenuViewController
-                    
-                    self.slideMenuController()?.changeLeftViewController(loggedInMenuController, closeLeft: true)
+                    self.showLoggedInMenu()
                 }
             }else {
                 dispatch_async(dispatch_get_main_queue()) { () -> Void in
                     self.popView()
-                    let loggedOutMenuController = GKConstants.sharedInstanse.storyboard.instantiateViewControllerWithIdentifier("GKLeftMenuViewController") as! GKLeftMenuViewController
-                    self.slideMenuController()?.changeLeftViewController(loggedOutMenuController, closeLeft: true)
+                    self.showLoggedOutMenu()
                 }
             }
             
@@ -182,22 +181,15 @@ class GKLevelDetailsViewController: UIViewController, HTTPClientDelegate {
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
-    @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
-    
     func performUnwindToMain() {
                 
         let loggedIn = GKUserDefaults.getBoolFromDefaultsForKey(kLoggedIn)
         
         if loggedIn {
-            let dynamicStoryBoard = UIStoryboard(name: "dynamicMenu", bundle: nil)
-            let newLeftMenuController = dynamicStoryBoard.instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as! GKLoggedInMenuViewController
-            self.slideMenuController()?.changeLeftViewController(newLeftMenuController, closeLeft: true)
+            self.showLoggedInMenu()
 
         }else{
-           
-            let dynamicStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-            let newLeftMenuController = dynamicStoryBoard.instantiateViewControllerWithIdentifier("GKLeftMenuViewController") as! GKLeftMenuViewController
-            self.slideMenuController()?.changeLeftViewController(newLeftMenuController, closeLeft: true)
+            self.showLoggedOutMenu()
 
         }
         self.performSegueWithIdentifier("goBackToMain", sender: self)

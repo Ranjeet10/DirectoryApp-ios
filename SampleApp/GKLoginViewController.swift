@@ -37,17 +37,6 @@ class GKLoginViewController: UIViewController, HTTPClientDelegate{
         }
     }
     
-    
-    
-    func showAlert(message:String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {action in
-            self.popView()
-        }))
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-    }
-    
     func checkUserHelper() {
         
         let url = GKConstants.sharedInstanse.checkUserAPI

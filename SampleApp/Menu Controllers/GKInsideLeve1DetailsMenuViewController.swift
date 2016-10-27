@@ -18,7 +18,6 @@ class GKInsideLeve1DetailsMenuViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(showLineNameMenu), name: "lineNameMenu", object: nil)
         self.menuTable.estimatedRowHeight = 100
         self.menuTable.rowHeight = UITableViewAutomaticDimension
         self.menuItems?.insert("Back", atIndex: 0)
@@ -28,18 +27,6 @@ class GKInsideLeve1DetailsMenuViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func showLineNameMenu(notification: NSNotification) {
-        
-        let userInfo = notification.userInfo as! [String: AnyObject]
-        let details = userInfo["lineName"] as! [String]?
-        self.menuItems = details!
-        
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.menuTable.reloadData()
-        }
-        
     }
     
     
@@ -74,12 +61,12 @@ class GKInsideLeve1DetailsMenuViewController: UIViewController {
         switch indexPath.row {
             
         case 0:
-            let notification = NSNotification(name: "PerformSegue", object: nil)
+            let notification = NSNotification(name: GKConstants.sharedInstanse.kShowMainPageNotification, object: nil)
             NSNotificationCenter.defaultCenter().postNotification(notification)
             self.closeLeft()
             break
         default:
-            let notification = NSNotification(name: "ChangeInsideLevelContents", object: nil, userInfo: ["lineName" : self.menuItems![indexPath.row]])
+            let notification = NSNotification(name: GKConstants.sharedInstanse.kChangeInsideLevelContents, object: nil, userInfo: ["lineName" : self.menuItems![indexPath.row]])
             NSNotificationCenter.defaultCenter().postNotification(notification)
             self.closeLeft()
         }

@@ -25,7 +25,7 @@ class GKProgressViewController: UIViewController {
         
         self.downloadProgress(self.currentProgressCount!)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.updateProgressView(_:)), name: "countNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.updateProgressView(_:)), name: GKConstants.sharedInstanse.kCountNotification, object: nil)
         
     }
     
@@ -64,6 +64,10 @@ class GKProgressViewController: UIViewController {
         let percentageString = String(percentageInt)
         return(percentage, percentageString)
         
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
 }

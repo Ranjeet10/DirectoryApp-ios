@@ -112,14 +112,9 @@ class GKLoggedInMenuViewController: UIViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        
         if indexPath.row == 0 {
             
-            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            
-            let viewMyProfile: GKUserDetailsViewController = storyboard.instantiateViewControllerWithIdentifier("GKUserDetailsViewController") as! GKUserDetailsViewController
+            let viewMyProfile: GKUserDetailsViewController = GKConstants.sharedInstanse.storyboard.instantiateViewControllerWithIdentifier("GKUserDetailsViewController") as! GKUserDetailsViewController
             
             viewMyProfile.profileDetails = self.profileDetails
             viewMyProfile.showMyProfile = true
@@ -127,13 +122,12 @@ class GKLoggedInMenuViewController: UIViewController {
             let navVC = UINavigationController(rootViewController: viewMyProfile)
             self.slideMenuController()?.changeMainViewController(navVC, close: true)
             
-            
         }
         
         
         if indexPath.row == 1 {
             
-            let editProfileViewController = storyboard.instantiateViewControllerWithIdentifier("GKEditProfileViewController") as! GKEditProfileViewController
+            let editProfileViewController = GKConstants.sharedInstanse.storyboard.instantiateViewControllerWithIdentifier("GKEditProfileViewController") as! GKEditProfileViewController
             editProfileViewController.profileDetails = self.profileDetails
             editProfileViewController.showMyProfile = true
             
@@ -146,7 +140,6 @@ class GKLoggedInMenuViewController: UIViewController {
             
             let appdelegate:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
             appdelegate.setupRootViewController(true)
-            
         }
         
         
@@ -169,13 +162,10 @@ class GKLoggedInMenuViewController: UIViewController {
             
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 
-                let loginViewController = storyboard.instantiateViewControllerWithIdentifier("GKLoginAppViewController") as! GKLoginAppViewController
+                let loginViewController = GKConstants.sharedInstanse.storyboard.instantiateViewControllerWithIdentifier("GKLoginAppViewController") as! GKLoginAppViewController
                 let navVC = UINavigationController(rootViewController: loginViewController)
-                let preLoggedInLeftMenuViewController = storyboard.instantiateViewControllerWithIdentifier("GKLeftMenuViewController") as! GKLeftMenuViewController
-                
                 self.slideMenuController()?.changeMainViewController(navVC, close: true)
-                self.slideMenuController()?.changeLeftViewController(preLoggedInLeftMenuViewController, closeLeft: true)
-                
+                self.showLoggedOutMenu()
                 GKUserDefaults.setBoolInDefaults(false, forKey: kLoggedIn)
                 NSUserDefaults.standardUserDefaults().synchronize()
             }

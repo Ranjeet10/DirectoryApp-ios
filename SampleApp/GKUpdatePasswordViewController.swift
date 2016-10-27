@@ -90,9 +90,9 @@ class GKUpdatePasswordViewController: UIViewController,HTTPClientDelegate {
         NSUserDefaults.standardUserDefaults().synchronize()
         
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.popView()
             
-            let loggedInMenuController = UIStoryboard(name: "dynamicMenu", bundle: nil).instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as! GKLoggedInMenuViewController
+            self.popView()
+            let loggedInMenuController = GKConstants.sharedInstanse.dynamicMenuStoryBoard.instantiateViewControllerWithIdentifier("GKLoggedInMenuViewController") as! GKLoggedInMenuViewController
             
             self.slideMenuController()?.changeLeftViewController(loggedInMenuController, closeLeft: true)
             
